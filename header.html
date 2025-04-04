@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+      :root {
+        --primary: #1e88e5;
+        --secondary: #43a047;
+        --dark: #263238;
+        --light: #f5f5f5;
+      }
+
+      /* Анимации */
+      @keyframes slideDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Шапка -->
+    <header class="sticky-header fade-in">
+      <div class="logo-container">
+        <img src="img/logo-uz.png" alt="School Academy" class="logo" />
+        <div class="school-info">
+          <h1>School Academy</h1>
+          <p>Ташкент, Юнусабадский район</p>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+
+          <li class="dropdown">
+            <a href="about.html">О школе <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="about.html#history">История</a></li>
+              <li><a href="about.html#teachers">Преподаватели</a></li>
+              <li><a href="about.html#gallery">Галерея</a></li>
+              <li><a href="about.html#mission">Миссия</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="program.html">Программы <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="program.html#kindergarten">Детский сад</a></li>
+              <li><a href="program.html#elementary">Начальная школа</a></li>
+              <li><a href="program.html#middle">Средняя школа</a></li>
+            </ul>
+          </li>
+
+          <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-right">
+        <div class="lang-switcher">
+          <button class="lang-btn active">РУ</button>
+          <button class="lang-btn">O'Z</button>
+        </div>
+        <div class="phone"><i class="fas fa-phone"></i> +998 (71) 123-45-67</div>
+        <div class="social">
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </header>
+
+    <script>
+      // Анимация выпадающего меню
+      document.querySelectorAll(".dropdown").forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+          const menu = item.querySelector(".dropdown-menu");
+          menu.style.display = "block";
+          menu.style.animation = "slideDown 0.3s ease-out forwards";
+        });
+
+        item.addEventListener("mouseleave", () => {
+          const menu = item.querySelector(".dropdown-menu");
+          menu.style.animation = "";
+          setTimeout(() => {
+            menu.style.display = "none";
+          }, 300);
+        });
+      });
+
+      // Мобильное меню
+      document.querySelector(".mobile-menu-btn").addEventListener("click", () => {
+        document.querySelector(".main-nav").classList.toggle("show-mobile");
+      });
+    </script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
