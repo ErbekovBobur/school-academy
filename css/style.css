@@ -1,12 +1,21 @@
 /* ===== Глобальные стили ===== */
 :root {
-  --primary: #3498db;
+  /* --primary: #3498db;
   --primary-dark: #2980b9;
   --secondary: #2ecc71;
   --dark: #2c3e50;
   --light: #ecf0f1;
   --white: #ffffff;
-  --gray: #95a5a6;
+  --gray: #95a5a6; */
+
+  --primary: #1e88e5; /* Основной синий */
+  --primary-dark: #2980b9; /* Темный синий */
+  --secondary: #2ecc71; /* Зеленый */
+  --dark: #2c3e50; /* Темный текст */
+  --light: #ecf0f1; /* Светлый фон */
+  --white: #ffffff;
+  --gray: #95a5a6; /* Серый текст */
+
   --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   --radius: 8px;
@@ -127,6 +136,7 @@ img {
 .nav-link.active::after {
   width: 100%;
 }
+/* Phone number */
 
 /* Выпадающее меню */
 .dropdown-menu {
@@ -555,4 +565,31 @@ img {
   .section-header h2 {
     font-size: 2rem;
   }
+}
+
+/* =========== */
+/* Стили для карты */
+.map-container {
+  margin-top: 50px;
+  padding: 70px;
+}
+
+.simple-map {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.address {
+  font-size: 0.95rem;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.address i {
+  color: var(--primary);
 }
