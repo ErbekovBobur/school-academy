@@ -61,3 +61,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const savedLang = localStorage.getItem("selectedLang") || "РУ";
   document.querySelector(`.lang-btn:contains('${savedLang}')`).click();
 });
+// ====222222222222=======
+document.querySelectorAll(".lang-btn").forEach((btn) => {
+  btn.addEventListener("click", function () {
+    // Удаляем active у всех кнопок
+    document.querySelectorAll(".lang-btn").forEach((b) => b.classList.remove("active"));
+
+    // Добавляем active текущей кнопке
+    this.classList.add("active");
+
+    // Обновляем позицию слайдера
+    const lang = this.getAttribute("data-lang");
+    document.querySelector(".language-switcher").setAttribute("data-active-lang", lang);
+
+    // Здесь можно добавить логику смены языка
+    console.log("Выбран язык:", lang);
+  });
+});
