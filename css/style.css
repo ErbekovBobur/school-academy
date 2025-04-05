@@ -154,11 +154,14 @@ img {
   transition: var(--transition);
   z-index: 100;
 }
-
-.dropdown:hover .dropdown-menu {
+/* .dropdown:hover .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+} */
+/* Проблема в строке 128 */
+.dropdown:hover .dropdown-menu {
+  display: block; /* Лучше использовать opacity/visibility для плавности */
 }
 
 .dropdown-menu li {

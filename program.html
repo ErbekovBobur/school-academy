@@ -16,7 +16,17 @@
   </head>
   <body>
     <!-- Шапка (такая же как на главной) -->
-    <header class="sticky-header">
+    <div id="header-placeholder"></div>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+    </script>
+
+    <!-- <header class="sticky-header">
       <div class="header-container">
         <div class="logo-container">
           <img src="img/logo-uz.png" alt="School Academy" class="logo" />
@@ -66,7 +76,7 @@
           <span class="menu-line"></span>
         </button>
       </div>
-    </header>
+    </header> -->
 
     <!-- Основной контент -->
     <main class="content-wrapper">

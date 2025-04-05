@@ -11,7 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Плавный скролл для якорных ссылок
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
+    // anchor.addEventListener("click", function (e) {
+    // Строка 15 - обработчик без debounce
+    window.addEventListener("scroll", function () {
+      // Может вызываться слишком часто
+
       e.preventDefault();
 
       if (this.classList.contains("nav-link")) {
