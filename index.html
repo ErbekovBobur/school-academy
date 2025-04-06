@@ -50,9 +50,9 @@
 
       <nav class="main-nav">
         <ul>
-          <li><a href="index.html" class="active nav-link">Главная</a></li>
+          <li><a data-translate="nav-home" href="index.html" class="active nav-link">Главная</a></li>
           <li class="dropdown">
-            <a href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
+            <a data-translate="nav-about" href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
             <ul class="dropdown-menu">
               <li><a href="about.html#history" class="nav-link">История</a></li>
               <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
@@ -79,11 +79,18 @@
             <button class="lang-btn">UZ</button>
           </div> -->
         <!-- ======2222222222====== -->
-        <div class="language-switcher">
+        <!--<div class="language-switcher">
           <button class="lang-btn active" data-lang="ru">РУ</button>
           <button class="lang-btn" data-lang="uz">UZ</button>
           <span class="lang-slider"></span>
-        </div>
+        </div>-->
+        <!--3333333333333-->
+        <!-- Заменить переключатель языка на этот код -->
+        <div class="language-switcher">
+          <button class="lang-btn active" data-lang="ru" aria-label="Русский язык">РУ</button>
+            <button class="lang-btn" data-lang="uz" aria-label="O'zbek tili">UZ</button>
+              <span class="lang-slider"></span>
+              </div>
         <!-- ===Phone===== -->
         <!-- <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div> -->
         <!-- ================+1111111111+================ -->

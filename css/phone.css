@@ -482,7 +482,7 @@
   background: var(--primary);
   color: var(--white);
   border-radius: 50%;
-  animation: pulse 2s infinite ease-in-out;
+  animation: pulse 1.5s infinite ease-in-out;
 }
 
 .bouncing-phone-number {
@@ -499,8 +499,10 @@
   0%,
   100% {
     transform: scale(1);
+    /*box-shadow: 1px 1px 10px 5px var(--primary-dark);*/
   }
   50% {
+    /*box-shadow: 1px 1px 0px 0px var(--primary-dark);*/
     transform: scale(1.1);
   }
 }
