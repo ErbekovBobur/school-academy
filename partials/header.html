@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <style></style>
+  </head>
+  <body>
+    <!-- Шапка -->
+    <header class="sticky-header">
+      <div class="header-container">
+        <div class="logo-container">
+          <img src="img/logo-uz.png" alt="School Academy" class="logo" loading="lazy">
+          <div class="school-info">
+            <h1 data-translate="school-name">School Academy</h1>
+            <p data-translate="address">Ташкент, Юнусабадский район</p>
+          </div>
+        </div>
+    
+        <nav class="main-nav" aria-label="Основная навигация">
+          <ul>
+            <li><a href="index.html" class="nav-link" data-translate="nav-home">Главная</a></li>
+            <li class="dropdown">
+              <a href="about.html" class="nav-link" data-translate="nav-about">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="about.html#history" class="nav-link" data-translate="nav-history">История</a></li>
+                <li><a href="about.html#teachers" class="nav-link" data-translate="nav-teachers">Преподаватели</a></li>
+              </ul>
+            </li>
+            <!-- Остальные пункты меню -->
+          </ul>
+        </nav>
+    
+        <div class="header-right">
+          <div class="language-switcher">
+            <button class="lang-btn active" data-lang="ru">РУ</button>
+            <button class="lang-btn" data-lang="uz">UZ</button>
+            <span class="lang-slider"></span>
+          </div>
+          
+          <div class="minimal-phone">
+            <div class="phone-pulse-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <a href="tel:+998711234567" class="bouncing-phone-number">+998 (71) 123-45-67</a>
+          </div>
+        </div>
+    
+        <button class="mobile-menu-btn" aria-label="Меню" aria-expanded="false">
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+        </button>
+      </div>
+    </header>
+
+    <script>
+      // Анимация выпадающего меню
+      document.querySelectorAll(".dropdown").forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+          const menu = item.querySelector(".dropdown-menu");
+          menu.style.display = "block";
+          menu.style.animation = "slideDown 0.3s ease-out forwards";
+        });
+
+        item.addEventListener("mouseleave", () => {
+          const menu = item.querySelector(".dropdown-menu");
+          menu.style.animation = "";
+          setTimeout(() => {
+            menu.style.display = "none";
+          }, 300);
+        });
+      });
+
+      // Мобильное меню
+      document.querySelector(".mobile-menu-btn").addEventListener("click", () => {
+        document.querySelector(".main-nav").classList.toggle("show-mobile");
+      });
+    </script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

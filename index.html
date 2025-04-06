@@ -1,73 +1,93 @@
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School Academy | Ташкент</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />    
-    <link rel="stylesheet" href="./css/phone.css">
-    <link rel="stylesheet" href="./css/lang.css">
-  </head>
-  <body>
-    <!-- Шапка -->
-    <header class="sticky-header">
-      <div class="header-container">
-        <div class="logo-container">
-          <img src="img/logo-uz.png" alt="School Academy" class="logo" />
-          <div class="school-info">
-            <h1>School Academy</h1>
-            <p>Ташкент, Юнусабадский район</p>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Academy | Ташкент</title>
+  <!-- Вставить ПЕРВЫМИ внутри <head> перед другими CSS/JS -->
+<link rel="preload" href="css/style.css" as="style">
+<link rel="preload" href="js/main.js" as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Для ключевых изображений -->
+<link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animate.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="./css/phone.css">
+  <link rel="stylesheet" href="./css/lang.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/language.js" defer></script>
+  
+  <!-- Yandex Metrika -->
+  <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#1e88e5">
+
+</head>
+
+<body>
+  <!-- Шапка -->
+  <header class="sticky-header">
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="img/logo-uz.png" alt="School Academy" class="logo" />
+        <div class="school-info">
+          <h1>School Academy</h1>
+          <p>Ташкент, Юнусабадский район</p>
         </div>
+      </div>
 
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html" class="active nav-link">Главная</a></li>
-            <li class="dropdown">
-              <a href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="about.html#history" class="nav-link">История</a></li>
-                <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
-                <li><a href="about.html#gallery" class="nav-link">Галерея</a></li>
-                <li><a href="about.html#mission" class="nav-link">Миссия</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="program.html" class="nav-link">Программы <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="program.html#kindergarten" class="nav-link">Детский сад</a></li>
-                <li><a href="program.html#elementary" class="nav-link">Начальная школа</a></li>
-                <li><a href="program.html#middle" class="nav-link">Средняя школа</a></li>
-              </ul>
-            </li>
-            <li><a href="contacts.html" class="nav-link">Контакты</a></li>
-          </ul>
-        </nav>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html" class="active nav-link">Главная</a></li>
+          <li class="dropdown">
+            <a href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="about.html#history" class="nav-link">История</a></li>
+              <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
+              <li><a href="about.html#gallery" class="nav-link">Галерея</a></li>
+              <li><a href="about.html#mission" class="nav-link">Миссия</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="program.html" class="nav-link">Программы <i class="fas fa-chevron-down dropdown-icon"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="program.html#kindergarten" class="nav-link">Детский сад</a></li>
+              <li><a href="program.html#elementary" class="nav-link">Начальная школа</a></li>
+              <li><a href="program.html#middle" class="nav-link">Средняя школа</a></li>
+            </ul>
+          </li>
+          <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+        </ul>
+      </nav>
 
-        <div class="header-right">
-          <!-- =lang=======11111111========= -->
-          <!-- <div class="lang-switcher">
+      <div class="header-right">
+        <!-- =lang=======11111111========= -->
+        <!-- <div class="lang-switcher">
             <button class="lang-btn active">РУ</button>
             <button class="lang-btn">UZ</button>
           </div> -->
-          <!-- ======2222222222====== -->
-          <div class="language-switcher">
-            <button class="lang-btn active" data-lang="ru">РУ</button>
-            <button class="lang-btn" data-lang="uz">UZ</button>
-            <span class="lang-slider"></span>
-          </div>
-          <!-- ===Phone===== -->
-          <!-- <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div> -->
-           <!-- ================+1111111111+================ -->
-           <!-- <div class="phone-container">
+        <!-- ======2222222222====== -->
+        <div class="language-switcher">
+          <button class="lang-btn active" data-lang="ru">РУ</button>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <span class="lang-slider"></span>
+        </div>
+        <!-- ===Phone===== -->
+        <!-- <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div> -->
+        <!-- ================+1111111111+================ -->
+        <!-- <div class="phone-container">
             <div class="phone-wrapper">
               <div class="phone-icon">
                 <i class="fas fa-phone-alt"></i>
@@ -79,8 +99,8 @@
             </div>
             <div class="phone-ripple"></div>
           </div> -->
-          <!-- ==============222222222222222================ -->
-          <!-- <div class="modern-phone">
+        <!-- ==============222222222222222================ -->
+        <!-- <div class="modern-phone">
             <div class="phone-icon-circle">
               <i class="fas fa-phone-alt"></i>
             </div>
@@ -89,8 +109,8 @@
               <span class="phone-label">Звонок бесплатный</span>
             </a>
           </div> -->
-          <!-- ============3333333333333============== -->
-          <!-- <div class="pulsing-phone-element">
+        <!-- ============3333333333333============== -->
+        <!-- <div class="pulsing-phone-element">
             <div class="pulsing-phone-icon">
               <i class="fas fa-phone-alt"></i>
             </div>
@@ -99,8 +119,8 @@
               <span class="phone-call-action">Доступно 24/7</span>
             </a>
           </div> -->
-          <!-- =========444444444444======== -->
-          <!-- <div class="animated-phone-element">
+        <!-- =========444444444444======== -->
+        <!-- <div class="animated-phone-element">
             <div class="phone-icon-pulse">
               <i class="fas fa-phone-alt"></i>
             </div>
@@ -109,190 +129,176 @@
               <span class="phone-call-hint">Нажмите для звонка</span>
             </a>
           </div> -->
-          <!-- =========5555555555====== -->
-          <div class="minimal-phone">
-            <div class="phone-pulse-icon">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <a href="tel:+998711234567" class="bouncing-phone-number">+998 (71) 123-45-67</a>
+        <!-- =========5555555555====== -->
+        <div class="minimal-phone">
+          <div class="phone-pulse-icon">
+            <i class="fas fa-phone-alt"></i>
           </div>
-          <!-- --------------- -->
+          <a href="tel:+998711234567" class="bouncing-phone-number">+998 (71) 123-45-67</a>
         </div>
-
-        <button class="mobile-menu-btn">
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-        </button>
+        <!-- --------------- -->
       </div>
-    </header>
 
-    <!-- Основной контент -->
-    <main class="content-wrapper">      
-      <!-- Баннер -->
-      <section class="hero-banner">
-        <div class="banner-overlay"></div>
-        <div class="banner-content">
-          <h1 class="wow fadeInUp" data-wow-delay="0.2s">Качественное образование <span>в Ташкенте</span></h1>
-          <p class="wow fadeInUp" data-wow-delay="0.4s">Лицензия МНО РУз №12345 | Юнусабадский район</p>
-          <!-- <button class="cta-button wow fadeInUp" data-wow-delay="0.6s">Записаться на экскурсию</button> -->
-          <a 
-          href="https://t.me/Shkolnayakademiya" 
-          class="cta-button wow fadeInUp" 
-          data-wow-delay="0.6s"
-          target="_blank"
-          rel="noopener noreferrer"
-      >
+      <button class="mobile-menu-btn">
+        <span class="menu-line"></span>
+        <span class="menu-line"></span>
+        <span class="menu-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Основной контент -->
+  <main class="content-wrapper">
+    <!-- Баннер -->
+    <section class="hero-banner">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Качественное образование <span>в Ташкенте</span></h1>
+        <p class="wow fadeInUp" data-wow-delay="0.4s">Лицензия МНО РУз №12345 | Юнусабадский район</p>
+        <!-- <button class="cta-button wow fadeInUp" data-wow-delay="0.6s">Записаться на экскурсию</button> -->
+        <a href="https://t.me/Shkolnayakademiya" class="cta-button wow fadeInUp" data-wow-delay="0.6s" target="_blank"
+          rel="noopener noreferrer">
           Записаться на экскурсию
-      </a>
+        </a>
+      </div>
+      <div class="scroll-down">
+        <div class="mouse">
+          <div class="scroller"></div>
         </div>
-        <div class="scroll-down">
-          <div class="mouse">
-            <div class="scroller"></div>
-          </div>
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- О школе -->
-      <section class="about-section section-padding">
-        <div class="container">
-          <div class="section-header wow fadeIn">
-            <h2>Наша школа</h2>
-            <div class="divider"></div>
-            <p>Уникальное пространство для развития</p>
-          </div>
-
-          <div class="features-grid">
-            <div class="feature-card wow fadeIn" data-wow-delay="0.2s">
-              <div class="feature-icon">
-                <i class="fas fa-user-graduate"></i>
-              </div>
-              <h3>Индивидуальный подход</h3>
-              <p>Программы адаптированы под способности каждого ученика</p>
-            </div>
-
-            <div class="feature-card wow fadeIn" data-wow-delay="0.4s">
-              <div class="feature-icon">
-                <i class="fas fa-laptop-code"></i>
-              </div>
-              <h3>IT-классы</h3>
-              <p>Современные компьютерные лаборатории</p>
-            </div>
-
-            <div class="feature-card wow fadeIn" data-wow-delay="0.6s">
-              <div class="feature-icon">
-                <i class="fas fa-medal"></i>
-              </div>
-              <h3>Подготовка в вузы</h3>
-              <p>90% выпускников поступают в топ-вузы</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Новости -->
-      <section class="news-section section-padding bg-light">
-        <div class="container">
-          <div class="section-header wow fadeIn">
-            <h2>Последние новости</h2>
-            <div class="divider"></div>
-            <p>Будьте в курсе наших событий</p>
-          </div>
-
-          <div class="news-grid">
-            <div class="news-card wow fadeIn" data-wow-delay="0.2s">
-              <div class="news-img" style="background-image: url('img/news1.jpg')"></div>
-              <div class="news-content">
-                <span class="news-date">15 мая 2024</span>
-                <h3>Открытие STEM-лаборатории</h3>
-                <p>Новое оборудование для изучения робототехники и программирования</p>
-                <a href="#" class="read-more">Подробнее <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-
-            <div class="news-card wow fadeIn" data-wow-delay="0.4s">
-              <div class="news-img" style="background-image: url('img/news2.jpg')"></div>
-              <div class="news-content">
-                <span class="news-date">10 мая 2024</span>
-                <h3>Победа в олимпиаде</h3>
-                <p>Наши ученики заняли первые места по математике и физике</p>
-                <a href="#" class="read-more">Подробнее <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Подвал -->
-    <footer class="main-footer">
+    <!-- О школе -->
+    <section class="about-section section-padding">
       <div class="container">
-        <div class="footer-content">
-          <div class="footer-column">
+        <div class="section-header wow fadeIn">
+          <h2>Наша школа</h2>
+          <div class="divider"></div>
+          <p>Уникальное пространство для развития</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card wow fadeIn" data-wow-delay="0.2s">
+            <div class="feature-icon">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <h3>Индивидуальный подход</h3>
+            <p>Программы адаптированы под способности каждого ученика</p>
+          </div>
+
+          <div class="feature-card wow fadeIn" data-wow-delay="0.4s">
+            <div class="feature-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3>IT-классы</h3>
+            <p>Современные компьютерные лаборатории</p>
+          </div>
+
+          <div class="feature-card wow fadeIn" data-wow-delay="0.6s">
+            <div class="feature-icon">
+              <i class="fas fa-medal"></i>
+            </div>
+            <h3>Подготовка в вузы</h3>
+            <p>90% выпускников поступают в топ-вузы</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Новости -->
+    <section class="news-section section-padding bg-light">
+      <div class="container">
+        <div class="section-header wow fadeIn">
+          <h2>Последние новости</h2>
+          <div class="divider"></div>
+          <p>Будьте в курсе наших событий</p>
+        </div>
+
+        <div class="news-grid">
+          <div class="news-card wow fadeIn" data-wow-delay="0.2s">
+            <div class="news-img" style="background-image: url('img/news1.jpg')"></div>
+            <div class="news-content">
+              <span class="news-date">15 мая 2024</span>
+              <h3>Открытие STEM-лаборатории</h3>
+              <p>Новое оборудование для изучения робототехники и программирования</p>
+              <a href="#" class="read-more">Подробнее <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="news-card wow fadeIn" data-wow-delay="0.4s">
+            <div class="news-img" style="background-image: url('img/news2.jpg')"></div>
+            <div class="news-content">
+              <span class="news-date">10 мая 2024</span>
+              <h3>Победа в олимпиаде</h3>
+              <p>Наши ученики заняли первые места по математике и физике</p>
+              <a href="#" class="read-more">Подробнее <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
           <h3>Часы работы</h3>
           <p>Пн-Пт: 8:00 - 18:00</p>
           <!-- <p>Сб: 9:00 - 14:00</p> -->
           <p>Вс: выходной</p>
-          </div>
-          <div class="footer-column">
-            <h3>Адрес</h3>
-            <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район, массив Юнусабад, 7-й квартал, 16/1</p>
-          </div>
-          <div class="footer-column">
-            <h3>Контакты</h3>
-            <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район</p>
-            <p><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</p>
-            <p><i class="fas fa-envelope"></i> info@schoolacademy.uz</p>
-          </div>
-          <div class="footer-column">
-            <h3>Соцсети</h3>
-            <div class="social-links">
-              <a href="https://t.me/Shkolnayakademiya"><i class="fab fa-telegram"></i></a>
-              <a href="https://www.instagram.com/shkolnayakademiya/"><i class="fab fa-instagram"></i></a>
-              <a href="https://www.facebook.com/NOUShkolnayaAkademiya/?locale=ru_RU"><i class="fab fa-facebook-f"></i></a>
-            </div>
-          </div>
-          <!-- <div class="footer-column"></div> -->
         </div>
-        <!-- <div class="footer-column" style="position: relative"> -->
-        <div class="footer-map">
-          <a
-            href="https://yandex.uz/maps/org/97045873646/?utm_medium=mapframe&utm_source=maps"
-            style="color: #eee; font-size: 12px; position: absolute; top: 0px"
-            >Школьная академия</a
-          ><a
-            href="https://yandex.uz/maps/10335/tashkent/category/private_school/184106252/?utm_medium=mapframe&utm_source=maps"
-            style="color: #eee; font-size: 12px; position: absolute; top: 14px"
-            >Частная школа в Ташкенте</a
-          >
-          <iframe
-            src="https://yandex.uz/map-widget/v1/?ll=69.272024%2C41.370359&mode=poi&poi%5Bpoint%5D=69.271655%2C41.371280&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D97045873646&z=17.94"
-            width="600"
-            height="500"
-            frameborder="1"
-            allowfullscreen="true"
-            style="position: relative"
-          >
-          </iframe>
-        </div>        
-        
+        <div class="footer-column">
+          <h3>Адрес</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район, массив Юнусабад, 7-й квартал, 16/1</p>
         </div>
-        <div class="copyright">
-          <p>© 2024 School Academy. Все права защищены.</p>
+        <div class="footer-column">
+          <h3>Контакты</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район</p>
+          <p><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</p>
+          <p><i class="fas fa-envelope"></i> info@schoolacademy.uz</p>
         </div>
+        <div class="footer-column">
+          <h3>Соцсети</h3>
+          <div class="social-links">
+            <a href="https://t.me/Shkolnayakademiya"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.instagram.com/shkolnayakademiya/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/NOUShkolnayaAkademiya/?locale=ru_RU"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <!-- <div class="footer-column"></div> -->
       </div>
-    </footer>
-<script src="./js/ya.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/language.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script>
-      new WOW({
-        boxClass: "wow",
-        animateClass: "animated",
-        offset: 50,
-        mobile: true,
-      }).init();
-    </script>
-  </body>
+      <!-- <div class="footer-column" style="position: relative"> -->
+      <div class="footer-map">
+        <a href="https://yandex.uz/maps/org/97045873646/?utm_medium=mapframe&utm_source=maps"
+          style="color: #eee; font-size: 12px; position: absolute; top: 0px">Школьная академия</a><a
+          href="https://yandex.uz/maps/10335/tashkent/category/private_school/184106252/?utm_medium=mapframe&utm_source=maps"
+          style="color: #eee; font-size: 12px; position: absolute; top: 14px">Частная школа в Ташкенте</a>
+        <iframe
+          src="https://yandex.uz/map-widget/v1/?ll=69.272024%2C41.370359&mode=poi&poi%5Bpoint%5D=69.271655%2C41.371280&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D97045873646&z=17.94"
+          width="600" height="500" frameborder="1" allowfullscreen="true" style="position: relative">
+        </iframe>
+      </div>
+
+    </div>
+    <div class="copyright">
+      <p>© 2024 School Academy. Все права защищены.</p>
+    </div>
+    </div>
+  </footer>
+  <script src="./js/ya.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/language.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script>
+    new WOW({
+      boxClass: "wow",
+      animateClass: "animated",
+      offset: 50,
+      mobile: true,
+    }).init();
+  </script>
+</body>
+
 </html>

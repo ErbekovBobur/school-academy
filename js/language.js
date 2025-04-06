@@ -1,80 +1,126 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const langButtons = document.querySelectorAll(".lang-btn");
-  const elementsToTranslate = {
-    title: {
-      РУ: "School Academy | Ташкент",
-      UZ: "School Academy | Toshkent",
+  // Полная библиотека переводов
+  const translations = {
+    "school-name": {
+      "ru": "School Academy",
+      "uz": "School Akademiyasi"
     },
-    welcome: {
-      РУ: "Добро пожаловать",
-      UZ: "Xush kelibsiz",
+    "address": {
+      "ru": "Ташкент, Юнусабадский район",
+      "uz": "Toshkent, Yunusobod tumani"
     },
-    address: {
-      РУ: "Ташкент, Юнусабадский район",
-      UZ: "Toshkent, Yunusobod tumani",
+    "nav-home": {
+      "ru": "Главная",
+      "uz": "Bosh sahifa"
     },
-    "main-nav-home": {
-      РУ: "Главная",
-      UZ: "Bosh sahifa",
+    "nav-about": {
+      "ru": "О школе",
+      "uz": "Maktab haqida"
     },
-    "main-nav-about": {
-      РУ: "О школе",
-      UZ: "Maktab haqida",
+    "nav-history": {
+      "ru": "История",
+      "uz": "Tarix"
     },
-    "main-nav-programs": {
-      РУ: "Программы",
-      UZ: "Dasturlar",
+    "nav-teachers": {
+      "ru": "Преподаватели",
+      "uz": "O'qituvchilar"
     },
-    "main-nav-contacts": {
-      РУ: "Контакты",
-      UZ: "Aloqa",
-    },
+    "appointment-title": {
+      "ru": "Записаться на экскурсию",
+      "uz": "Ekskursiyaga yozilish"
+    }
+    // Добавьте другие фразы по аналогии
   };
 
-  langButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      // Удаляем активный класс у всех кнопок
-      langButtons.forEach((btn) => btn.classList.remove("active"));
+  // Функция применения языка
+  function applyLanguage(lang) {
+    // Переводим элементы с data-translate
+    document.querySelectorAll("[data-translate]").forEach(element => {
+      const key = element.getAttribute("data-translate");
+      if (translations[key] && translations[key][lang]) {
+        element.textContent = translations[key][lang];
+      }
+    });
 
-      // Добавляем активный класс текущей кнопке
-      this.classList.add("active");
+    // Обновляем атрибут lang у html
+    document.documentElement.lang = lang;
 
-      // Получаем выбранный язык
-      const lang = this.textContent;
+    // Переводим placeholder у инпутов
+    document.querySelectorAll("[data-translate-placeholder]").forEach(input => {
+      const key = input.getAttribute("data-translate-placeholder");
+      if (translations[key] && translations[key][lang]) {
+        input.placeholder = translations[key][lang];
+      }
+    });
+  }
 
-      // Применяем перевод ко всем элементам
-      document.title = elementsToTranslate["title"][lang];
+  // Инициализация языка
+  function initLanguage() {
+    // Проверяем сохранённый язык или берём язык браузера
+    const savedLang = localStorage.getItem("selectedLang");
+    const browserLang = navigator.language.slice(0, 2);
+    const defaultLang = ["ru", "uz"].includes(browserLang) ? browserLang : "ru";
+    const lang = savedLang || defaultLang;
 
-      document.querySelectorAll("[data-translate]").forEach((element) => {
-        const key = element.getAttribute("data-translate");
-        if (elementsToTranslate[key]) {
-          element.textContent = elementsToTranslate[key][lang];
-        }
+    // Применяем язык
+    applyLanguage(lang);
+
+    // Обновляем кнопки переключателя
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+    });
+
+    // Анимируем переключатель
+    const slider = document.querySelector(".lang-slider");
+    if (slider) {
+      slider.style.transform = lang === "uz" ? "translateX(100%)" : "translateX(0)";
+    }
+  }
+
+  // Обработчики кнопок переключения
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const lang = this.getAttribute("data-lang");
+
+      // Сохраняем выбор
+      localStorage.setItem("selectedLang", lang);
+
+      // Применяем язык
+      applyLanguage(lang);
+
+      // Обновляем UI переключателя
+      document.querySelectorAll(".lang-btn").forEach(b => {
+        b.classList.toggle("active", b === this);
       });
 
-      // Сохраняем выбор языка в localStorage
-      localStorage.setItem("selectedLang", lang);
+      // Анимация слайдера
+      const slider = document.querySelector(".lang-slider");
+      if (slider) {
+        slider.style.transform = lang === "uz" ? "translateX(100%)" : "translateX(0)";
+      }
     });
   });
 
-  // Восстанавливаем выбранный язык при загрузке страницы
-  const savedLang = localStorage.getItem("selectedLang") || "РУ";
-  document.querySelector(`.lang-btn:contains('${savedLang}')`).click();
+  // Инициализация при загрузке
+  initLanguage();
 });
-// ====222222222222=======
-document.querySelectorAll(".lang-btn").forEach((btn) => {
-  btn.addEventListener("click", function () {
-    // Удаляем active у всех кнопок
-    document.querySelectorAll(".lang-btn").forEach((b) => b.classList.remove("active"));
 
-    // Добавляем active текущей кнопке
-    this.classList.add("active");
 
-    // Обновляем позицию слайдера
-    const lang = this.getAttribute("data-lang");
-    document.querySelector(".language-switcher").setAttribute("data-active-lang", lang);
-
-    // Здесь можно добавить логику смены языка
-    console.log("Выбран язык:", lang);
-  });
+// В language.js добавить
+const dateElements = document.querySelectorAll("[data-translate-date]");
+dateElements.forEach(el => {
+  const date = new Date(el.getAttribute("data-translate-date"));
+  el.textContent = date.toLocaleDateString(lang);
 });
+
+async function loadTranslations(lang) {
+  const response = await fetch(`translations/${lang}.json`);
+  return await response.json();
+}
+
+function getTranslation(key, lang) {
+  return translations[key]?.[lang] || translations[key]?.['ru'] || key;
+}
+
+console.log('Current lang:', lang);
+console.log('Translating element:', element);
