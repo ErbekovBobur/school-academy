@@ -37,12 +37,39 @@
   <!-- Шапка -->
   <div id="header-placeholder"></div>
 
+<<<<<<< HEAD
   <script>
     // Модифицируем скрипт загрузки header
     fetch("./partials/header.html")
       .then((response) => response.text())
       .then((data) => {
         document.getElementById("header-placeholder").innerHTML = data;
+=======
+      <nav class="main-nav">
+        <ul>
+          <li><a data-translate="nav-home" href="index.html" class="active nav-link">Главная</a></li>
+          <li><a data-translate="nav-home" href="newsImg.html" class="active nav-link">News out</a></li>
+          <li class="dropdown">
+            <a data-translate="nav-about" href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="about.html#history" class="nav-link">История</a></li>
+              <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
+              <li><a href="about.html#gallery" class="nav-link">Галерея</a></li>
+              <li><a href="about.html#mission" class="nav-link">Миссия</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="program.html" class="nav-link">Программы <i class="fas fa-chevron-down dropdown-icon"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="program.html#kindergarten" class="nav-link">Детский сад</a></li>
+              <li><a href="program.html#elementary" class="nav-link">Начальная школа</a></li>
+              <li><a href="program.html#middle" class="nav-link">Средняя школа</a></li>
+            </ul>
+          </li>
+          <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+        </ul>
+      </nav>
+>>>>>>> f906c308c1b7286c072571da14d1c3decc8cfcc3
 
         // Улучшенная логика определения активной страницы
         const currentPath = window.location.pathname;
