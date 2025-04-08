@@ -1,210 +1,236 @@
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>О школе | School Academy</title>
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="js/main.js" as="script" />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      as="style"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>О школе | School Academy</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/animate.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="/css/phone.css" />
-</head>
+    <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="./css/phone.css" />
+    <link rel="stylesheet" href="./css/lang.css" />
 
-<body>
-  <!-- Шапка (такая же как на главной) -->
-  <div id="header-placeholder"></div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script src="js/analytics.js" defer></script>
+    <script src="js/language.js" defer></script>
 
-  <script>
-    fetch("header.html")
-      .then((response) => response.text())
-      .then((data) => {
-        document.getElementById("header-placeholder").innerHTML = data;
-      });
-  </script>
+    <noscript>
+      <div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position: absolute; left: -9999px" alt="" /></div>
+    </noscript>
 
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1e88e5" />
+  </head>
 
-  <!-- Основной контент -->
-  <main class="content-wrapper">
-    <!-- История школы -->
-    <section id="history" class="section-padding">
-      <div class="container">
-        <div class="section-header wow fadeIn">
-          <h2>Наша история</h2>
-          <div class="divider"></div>
-          <p>Как все начиналось</p>
-        </div>
+  <body>
+    <!-- Шапка (такая же как на главной) -->
+    <div id="header-placeholder"></div>
 
-        <div class="timeline">
-          <div class="timeline-item wow fadeInLeft">
-            <div class="timeline-year">2010</div>
-            <div class="timeline-content">
-              <h3>Основание школы</h3>
-              <p>Школа открыла свои двери для первых 50 учеников начальных классов</p>
-            </div>
+    <script>
+      // Модифицируем ваш скрипт загрузки header
+      fetch("./partials/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+
+          // После загрузки header добавляем логику active ссылки
+          const currentPage = window.location.pathname.split("/").pop() || "index.html";
+          const navLinks = document.querySelectorAll("nav ul li a");
+
+          navLinks.forEach((link) => {
+            const linkPage = link.getAttribute("href").split("/").pop();
+            if (linkPage === currentPage) {
+              link.classList.add("active");
+            }
+          });
+        });
+    </script>
+
+    <!-- Основной контент -->
+    <main class="content-wrapper">
+      <!-- История школы -->
+      <section id="history" class="section-padding">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Наша история</h2>
+            <div class="divider"></div>
+            <p>Как все начиналось</p>
           </div>
 
-          <div class="timeline-item wow fadeInRight">
-            <div class="timeline-year">2015</div>
-            <div class="timeline-content">
-              <h3>Расширение</h3>
-              <p>Построено новое здание для средней школы и спортивный комплекс</p>
-            </div>
-          </div>
-
-          <div class="timeline-item wow fadeInLeft">
-            <div class="timeline-year">2020</div>
-            <div class="timeline-content">
-              <h3>Современные технологии</h3>
-              <p>Оснащение классов интерактивными досками и компьютерными лабораториями</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Преподаватели -->
-    <section id="teachers" class="section-padding bg-light">
-      <div class="container">
-        <div class="section-header wow fadeIn">
-          <h2>Наши преподаватели</h2>
-          <div class="divider"></div>
-          <p>Профессионалы с большим опытом</p>
-        </div>
-
-        <div class="teachers-grid">
-          <div class="teacher-card wow fadeIn" data-wow-delay="0.2s">
-            <div class="teacher-img" style="background-image: url('img/teachers/teacher1.jpg')"></div>
-            <div class="teacher-info">
-              <h3>Исматова Дилфуза</h3>
-              <p class="subject">Математика</p>
-              <p class="experience">Опыт: 15 лет</p>
-              <div class="teacher-social">
-                <a href="#"><i class="fab fa-telegram"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+          <div class="timeline">
+            <div class="timeline-item wow fadeInLeft">
+              <div class="timeline-year">2010</div>
+              <div class="timeline-content">
+                <h3>Основание школы</h3>
+                <p>Школа открыла свои двери для первых 50 учеников начальных классов</p>
               </div>
             </div>
-          </div>
 
-          <div class="teacher-card wow fadeIn" data-wow-delay="0.4s">
-            <div class="teacher-img" style="background-image: url('img/teachers/teacher2.jpg')"></div>
-            <div class="teacher-info">
-              <h3>Каримов Рустам</h3>
-              <p class="subject">Физика и робототехника</p>
-              <p class="experience">Опыт: 10 лет</p>
-              <div class="teacher-social">
-                <a href="#"><i class="fab fa-telegram"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+            <div class="timeline-item wow fadeInRight">
+              <div class="timeline-year">2015</div>
+              <div class="timeline-content">
+                <h3>Расширение</h3>
+                <p>Построено новое здание для средней школы и спортивный комплекс</p>
+              </div>
+            </div>
+
+            <div class="timeline-item wow fadeInLeft">
+              <div class="timeline-year">2020</div>
+              <div class="timeline-content">
+                <h3>Современные технологии</h3>
+                <p>Оснащение классов интерактивными досками и компьютерными лабораториями</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Галерея -->
-    <section id="gallery" class="section-padding">
+      <!-- Преподаватели -->
+      <section id="teachers" class="section-padding bg-light">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Наши преподаватели</h2>
+            <div class="divider"></div>
+            <p>Профессионалы с большим опытом</p>
+          </div>
+
+          <div class="teachers-grid">
+            <div class="teacher-card wow fadeIn" data-wow-delay="0.2s">
+              <div class="teacher-img" style="background-image: url('img/teachers/teacher1.jpg')"></div>
+              <div class="teacher-info">
+                <h3>Исматова Дилфуза</h3>
+                <p class="subject">Математика</p>
+                <p class="experience">Опыт: 15 лет</p>
+                <div class="teacher-social">
+                  <a href="#"><i class="fab fa-telegram"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="teacher-card wow fadeIn" data-wow-delay="0.4s">
+              <div class="teacher-img" style="background-image: url('img/teachers/teacher2.jpg')"></div>
+              <div class="teacher-info">
+                <h3>Каримов Рустам</h3>
+                <p class="subject">Физика и робототехника</p>
+                <p class="experience">Опыт: 10 лет</p>
+                <div class="teacher-social">
+                  <a href="#"><i class="fab fa-telegram"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Галерея -->
+      <section id="gallery" class="section-padding">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Галерея</h2>
+            <div class="divider"></div>
+            <p>Жизнь нашей школы</p>
+          </div>
+
+          <div class="gallery-grid">
+            <div class="gallery-item wow fadeIn" data-wow-delay="0.1s">
+              <img src="img/gallery/1.jpg" alt="Школьные мероприятия" />
+              <div class="gallery-overlay">
+                <h3>Школьные мероприятия</h3>
+              </div>
+            </div>
+            <div class="gallery-item wow fadeIn" data-wow-delay="0.2s">
+              <img src="img/gallery/2.jpg" alt="Учебные классы" />
+              <div class="gallery-overlay">
+                <h3>Учебные классы</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Миссия -->
+      <section id="mission" class="section-padding bg-light">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Наша миссия</h2>
+            <div class="divider"></div>
+          </div>
+
+          <div class="mission-content wow fadeIn">
+            <p>
+              Мы стремимся создать среду, где каждый ученик может раскрыть свой потенциал, получить качественное
+              образование и воспитать в себе лидерские качества, необходимые для успеха в современном мире.
+            </p>
+
+            <div class="mission-values">
+              <div class="value-item">
+                <i class="fas fa-graduation-cap"></i>
+                <h4>Качество образования</h4>
+              </div>
+              <div class="value-item">
+                <i class="fas fa-users"></i>
+                <h4>Индивидуальный подход</h4>
+              </div>
+              <div class="value-item">
+                <i class="fas fa-globe"></i>
+                <h4>Глобальное мышление</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Подвал (такой же как на главной) -->
+    <footer class="main-footer">
       <div class="container">
-        <div class="section-header wow fadeIn">
-          <h2>Галерея</h2>
-          <div class="divider"></div>
-          <p>Жизнь нашей школы</p>
-        </div>
-
-        <div class="gallery-grid">
-          <div class="gallery-item wow fadeIn" data-wow-delay="0.1s">
-            <img src="img/gallery/1.jpg" alt="Школьные мероприятия" />
-            <div class="gallery-overlay">
-              <h3>Школьные мероприятия</h3>
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Контакты</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район</p>
+            <p><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</p>
+            <p><i class="fas fa-envelope"></i> info@schoolacademy.uz</p>
+          </div>
+          <div class="footer-column">
+            <h3>Соцсети</h3>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-telegram"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
             </div>
           </div>
-          <div class="gallery-item wow fadeIn" data-wow-delay="0.2s">
-            <img src="img/gallery/2.jpg" alt="Учебные классы" />
-            <div class="gallery-overlay">
-              <h3>Учебные классы</h3>
-            </div>
+          <div class="footer-column">
+            <h3>Часы работы</h3>
+            <p>Пн-Пт: 8:00 - 18:00</p>
+            <p>Сб: 9:00 - 14:00</p>
+            <p>Вс: выходной</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Миссия -->
-    <section id="mission" class="section-padding bg-light">
-      <div class="container">
-        <div class="section-header wow fadeIn">
-          <h2>Наша миссия</h2>
-          <div class="divider"></div>
-        </div>
-
-        <div class="mission-content wow fadeIn">
-          <p>
-            Мы стремимся создать среду, где каждый ученик может раскрыть свой потенциал, получить качественное
-            образование и воспитать в себе лидерские качества, необходимые для успеха в современном мире.
-          </p>
-
-          <div class="mission-values">
-            <div class="value-item">
-              <i class="fas fa-graduation-cap"></i>
-              <h4>Качество образования</h4>
-            </div>
-            <div class="value-item">
-              <i class="fas fa-users"></i>
-              <h4>Индивидуальный подход</h4>
-            </div>
-            <div class="value-item">
-              <i class="fas fa-globe"></i>
-              <h4>Глобальное мышление</h4>
-            </div>
-          </div>
+        <div class="copyright">
+          <p>© 2024 School Academy. Все права защищены.</p>
         </div>
       </div>
-    </section>
-  </main>
+    </footer>
 
-  <!-- Подвал (такой же как на главной) -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>Контакты</h3>
-          <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район</p>
-          <p><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</p>
-          <p><i class="fas fa-envelope"></i> info@schoolacademy.uz</p>
-        </div>
-        <div class="footer-column">
-          <h3>Соцсети</h3>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-telegram"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-column">
-          <h3>Часы работы</h3>
-          <p>Пн-Пт: 8:00 - 18:00</p>
-          <p>Сб: 9:00 - 14:00</p>
-          <p>Вс: выходной</p>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>© 2024 School Academy. Все права защищены.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
-  <script src="js/language.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-  <script>
-    new WOW().init();
-  </script>
-</body>
-
+    <script src="js/main.js"></script>
+    <script src="js/language.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>
+      new WOW().init();
+    </script>
+  </body>
 </html>
 <!--
 git checkout -b имя-новой-ветки

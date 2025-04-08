@@ -5,31 +5,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>School Academy | Ташкент</title>
-  <!-- Вставить ПЕРВЫМИ внутри <head> перед другими CSS/JS -->
-<link rel="preload" href="css/style.css" as="style">
-<link rel="preload" href="js/main.js" as="script">
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
+    crossorigin>
+  <!-- <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x"> -->
+  <link rel="shortcut icon" href="img/logo-uz.png" type="image/x-icon">
 
-<!-- Для ключевых изображений -->
-<link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x">
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animate.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/phone.css">
+  <link rel="stylesheet" href="css/lang.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/responsive.css">
 
-  <link rel="stylesheet" href="./css/phone.css">
-  <link rel="stylesheet" href="./css/lang.css">
+  <!-- <script src="js/language.js" defer></script> -->
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script src="js/analytics.js"></script>
-  <script src="js/language.js" defer></script>
-  
-  <!-- Yandex Metrika -->
-  <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script src="js/analytics.js" defer></script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position:absolute; left:-9999px;" alt="" /></div>
+  </noscript> -->
 
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1e88e5">
@@ -38,122 +35,45 @@
 
 <body>
   <!-- Шапка -->
-  <header class="sticky-header">
-    <div class="header-container">
-      <div class="logo-container">
-        <img src="img/logo-uz.png" alt="School Academy" class="logo" />
-        <div class="school-info">
-          <h1>School Academy</h1>
-          <p>Ташкент, Юнусабадский район</p>
-        </div>
-      </div>
+  <div id="header-placeholder"></div>
 
-      <nav class="main-nav">
-        <ul>
-          <li><a data-translate="nav-home" href="index.html" class="active nav-link">Главная</a></li>
-          <li><a data-translate="nav-home" href="newsImg.html" class="active nav-link">News out</a></li>
-          <li class="dropdown">
-            <a data-translate="nav-about" href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
-            <ul class="dropdown-menu">
-              <li><a href="about.html#history" class="nav-link">История</a></li>
-              <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
-              <li><a href="about.html#gallery" class="nav-link">Галерея</a></li>
-              <li><a href="about.html#mission" class="nav-link">Миссия</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="program.html" class="nav-link">Программы <i class="fas fa-chevron-down dropdown-icon"></i></a>
-            <ul class="dropdown-menu">
-              <li><a href="program.html#kindergarten" class="nav-link">Детский сад</a></li>
-              <li><a href="program.html#elementary" class="nav-link">Начальная школа</a></li>
-              <li><a href="program.html#middle" class="nav-link">Средняя школа</a></li>
-            </ul>
-          </li>
-          <li><a href="contacts.html" class="nav-link">Контакты</a></li>
-        </ul>
-      </nav>
+  <script>
+    // Модифицируем скрипт загрузки header
+    fetch("./partials/header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("header-placeholder").innerHTML = data;
 
-      <div class="header-right">
-        <!-- =lang=======11111111========= -->
-        <!-- <div class="lang-switcher">
-            <button class="lang-btn active">РУ</button>
-            <button class="lang-btn">UZ</button>
-          </div> -->
-        <!-- ======2222222222====== -->
-        <!--<div class="language-switcher">
-          <button class="lang-btn active" data-lang="ru">РУ</button>
-          <button class="lang-btn" data-lang="uz">UZ</button>
-          <span class="lang-slider"></span>
-        </div>-->
-        <!--3333333333333-->
-        <!-- Заменить переключатель языка на этот код -->
-        <div class="language-switcher">
-          <button class="lang-btn active" data-lang="ru" aria-label="Русский язык">РУ</button>
-            <button class="lang-btn" data-lang="uz" aria-label="O'zbek tili">UZ</button>
-              <span class="lang-slider"></span>
-              </div>
-        <!-- ===Phone===== -->
-        <!-- <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div> -->
-        <!-- ================+1111111111+================ -->
-        <!-- <div class="phone-container">
-            <div class="phone-wrapper">
-              <div class="phone-icon">
-                <i class="fas fa-phone-alt"></i>
-              </div>
-              <a href="tel:+998711234567" class="phone-link">
-                <span class="phone-number">+998 (71) 123-45-67</span>
-                <span class="phone-call-text">Позвонить сейчас</span>
-              </a>
-            </div>
-            <div class="phone-ripple"></div>
-          </div> -->
-        <!-- ==============222222222222222================ -->
-        <!-- <div class="modern-phone">
-            <div class="phone-icon-circle">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <a href="tel:+998711234567" class="phone-content">
-              <span class="phone-number">+998 (71) 123-45-67</span>
-              <span class="phone-label">Звонок бесплатный</span>
-            </a>
-          </div> -->
-        <!-- ============3333333333333============== -->
-        <!-- <div class="pulsing-phone-element">
-            <div class="pulsing-phone-icon">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <a href="tel:+998711234567" class="pulsing-phone-link">
-              <span class="pulsing-phone-number">+998 (71) 123-45-67</span>
-              <span class="phone-call-action">Доступно 24/7</span>
-            </a>
-          </div> -->
-        <!-- =========444444444444======== -->
-        <!-- <div class="animated-phone-element">
-            <div class="phone-icon-pulse">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <a href="tel:+998711234567" class="phone-link-motion">
-              <span class="phone-number-bounce">+998 (71) 123-45-67</span>
-              <span class="phone-call-hint">Нажмите для звонка</span>
-            </a>
-          </div> -->
-        <!-- =========5555555555====== -->
-        <div class="minimal-phone">
-          <div class="phone-pulse-icon">
-            <i class="fas fa-phone-alt"></i>
-          </div>
-          <a href="tel:+998711234567" class="bouncing-phone-number">+998 (71) 123-45-67</a>
-        </div>
-        <!-- --------------- -->
-      </div>
+        // Улучшенная логика определения активной страницы
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll("nav ul li a:not(.dropdown-menu li a)"); // Исключаем ссылки выпадающего меню
 
-      <button class="mobile-menu-btn">
-        <span class="menu-line"></span>
-        <span class="menu-line"></span>
-        <span class="menu-line"></span>
-      </button>
-    </div>
-  </header>
+        navLinks.forEach((link) => {
+          const linkPath = link.getAttribute("href");
+
+          // Удаляем класс active у всех ссылок
+          link.classList.remove("active");
+
+          // Сравниваем пути
+          const isIndexPage = currentPath.endsWith('/') ||
+            currentPath.endsWith('index.html') ||
+            currentPath === '';
+
+          if ((isIndexPage && linkPath === 'index.html') ||
+            (!isIndexPage && currentPath.includes(linkPath.replace('.html', '')))) {
+            link.classList.add("active");
+          }
+        });
+
+        // Инициализация мобильного меню (если нужно)
+        document.querySelector(".mobile-menu-btn")?.addEventListener("click", () => {
+          document.querySelector(".main-nav").classList.toggle("show-mobile");
+        });
+      })
+      .catch((error) => {
+        console.error("Error loading header:", error);
+      });
+  </script>
 
   <!-- Основной контент -->
   <main class="content-wrapper">
@@ -278,7 +198,7 @@
         <!-- <div class="footer-column"></div> -->
       </div>
       <!-- <div class="footer-column" style="position: relative"> -->
-      <div class="footer-map">
+      <!-- <div class="footer-map">
         <a href="https://yandex.uz/maps/org/97045873646/?utm_medium=mapframe&utm_source=maps"
           style="color: #eee; font-size: 12px; position: absolute; top: 0px">Школьная академия</a><a
           href="https://yandex.uz/maps/10335/tashkent/category/private_school/184106252/?utm_medium=mapframe&utm_source=maps"
@@ -287,7 +207,7 @@
           src="https://yandex.uz/map-widget/v1/?ll=69.272024%2C41.370359&mode=poi&poi%5Bpoint%5D=69.271655%2C41.371280&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D97045873646&z=17.94"
           width="600" height="500" frameborder="1" allowfullscreen="true" style="position: relative">
         </iframe>
-      </div>
+      </div> -->
 
     </div>
     <div class="copyright">
@@ -296,16 +216,19 @@
     </div>
   </footer>
   <script src="./js/ya.js"></script>
-  <script src="js/main.js"></script>
   <script src="js/language.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/form-validation.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
   <script>
-    new WOW({
-      boxClass: "wow",
-      animateClass: "animated",
-      offset: 50,
-      mobile: true,
-    }).init();
+    document.addEventListener("DOMContentLoaded", () => {
+      new WOW({
+        boxClass: "wow",
+        animateClass: "animated",
+        offset: 50,
+        mobile: true,
+      }).init();
+    });
   </script>
 </body>
 

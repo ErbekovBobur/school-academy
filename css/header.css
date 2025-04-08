@@ -1,0 +1,51 @@
+/* Стиль для активной ссылки */
+nav ul li a.active {
+  position: relative;
+  color: #007bff; /* Цвет текста активной ссылки */
+}
+
+nav ul li a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #007bff;
+  transition: all 0.3s ease;
+}
+
+/* Убедитесь, что обычные ссылки не имеют подчеркивания */
+nav ul li a {
+  text-decoration: none;
+}
+/* Убедитесь, что эти стили есть */
+nav ul li a {
+  position: relative;
+  text-decoration: none;
+}
+
+nav ul li a.active {
+  color: #007bff; /* Цвет активной ссылки */
+}
+
+nav ul li a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #007bff;
+  transition: all 0.3s ease;
+}
+
+/* Для мобильного меню */
+.main-nav.show-mobile {
+  display: block;
+}
+
+/* Для мобильного меню */
+.main-nav.show-mobile {
+  display: block;
+}

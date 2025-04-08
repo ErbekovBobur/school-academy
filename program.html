@@ -1,33 +1,61 @@
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="js/main.js" as="script" />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      as="style"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Программы | School Academy</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/animate.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
-    rel="stylesheet" />
-</head>
+    <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="./css/phone.css" />
+    <link rel="stylesheet" href="./css/lang.css" />
 
-<body>
-  <!-- Шапка (такая же как на главной) -->
-  <div id="header-placeholder"></div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script src="js/analytics.js" defer></script>
+    <script src="js/language.js" defer></script>
 
-  <script>
-    fetch("header.html")
-      .then((response) => response.text())
-      .then((data) => {
-        document.getElementById("header-placeholder").innerHTML = data;
-      });
-  </script>
+    <noscript>
+      <div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position: absolute; left: -9999px" alt="" /></div>
+    </noscript>
 
-  <!-- <header class="sticky-header">
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1e88e5" />
+  </head>
+
+  <body>
+    <!-- Шапка (такая же как на главной) -->
+    <div id="header-placeholder"></div>
+
+    <script>
+      // Модифицируем ваш скрипт загрузки header
+      fetch("./partials/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+
+          // После загрузки header добавляем логику active ссылки
+          const currentPage = window.location.pathname.split("/").pop() || "index.html";
+          const navLinks = document.querySelectorAll("nav ul li a");
+
+          navLinks.forEach((link) => {
+            const linkPage = link.getAttribute("href").split("/").pop();
+            if (linkPage === currentPage) {
+              link.classList.add("active");
+            }
+          });
+        });
+    </script>
+
+    <!-- <header class="sticky-header">
       <div class="header-container">
         <div class="logo-container">
           <img src="img/logo-uz.png" alt="School Academy" class="logo" />
@@ -79,223 +107,220 @@
       </div>
     </header> -->
 
-  <!-- Основной контент -->
-  <main class="content-wrapper">
-    <!-- Детский сад -->
-    <section id="kindergarten" class="section-padding">
-      <div class="container">
-        <div class="section-header wow fadeIn">
-          <h2>Детский сад</h2>
-          <div class="divider"></div>
-          <p>Для детей 3-6 лет</p>
-        </div>
-
-        <div class="program-container wow fadeIn">
-          <div class="program-img">
-            <img src="img/programs/kindergarten.jpg" alt="Детский сад" />
+    <!-- Основной контент -->
+    <main class="content-wrapper">
+      <!-- Детский сад -->
+      <section id="kindergarten" class="section-padding">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Детский сад</h2>
+            <div class="divider"></div>
+            <p>Для детей 3-6 лет</p>
           </div>
-          <div class="program-content">
-            <h3>Раннее развитие</h3>
-            <p>Наша программа для дошкольников направлена на всестороннее развитие ребенка в игровой форме.</p>
 
-            <div class="program-features">
-              <div class="feature">
-                <i class="fas fa-check-circle"></i>
-                <span>Развитие речи и логики</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check-circle"></i>
-                <span>Подготовка к школе</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check-circle"></i>
-                <span>Творческие занятия</span>
-              </div>
+          <div class="program-container wow fadeIn">
+            <div class="program-img">
+              <img src="img/programs/kindergarten.jpg" alt="Детский сад" />
             </div>
+            <div class="program-content">
+              <h3>Раннее развитие</h3>
+              <p>Наша программа для дошкольников направлена на всестороннее развитие ребенка в игровой форме.</p>
 
-            <button class="cta-button">Узнать подробнее</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Начальная школа -->
-    <section id="elementary" class="section-padding bg-light">
-      <div class="container">
-        <div class="section-header wow fadeIn">
-          <h2>Начальная школа</h2>
-          <div class="divider"></div>
-          <p>1-4 классы</p>
-        </div>
-
-        <div class="program-container reverse wow fadeIn">
-          <div class="program-img">
-            <img src="img/programs/elementary.jpg" alt="Начальная школа" />
-          </div>
-          <div class="program-content">
-            <h3>Фундаментальные знания</h3>
-            <p>Программа начальной школы сочетает традиционные методы обучения с современными технологиями.</p>
-
-            <div class="program-features">
-              <div class="feature">
-                <i class="fas fa-check-circle"></i>
-                <span>Углубленное изучение языков</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check-circle"></i>
-                <span>Проектная деятельность</span>
-              </div>
-              <div class="feature">
-                <i class="fas fa-check-circle"></i>
-                <span>IT-грамотность с 1 класса</span>
-              </div>
-            </div>
-
-            <button class="cta-button">Узнать подробнее</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Средняя школа -->
-    <section id="middle" class="section-padding">
-      <div class="container">
-        <div class="section-header wow fadeIn">
-          <h2>Средняя школа</h2>
-          <div class="divider"></div>
-          <p>5-11 классы</p>
-        </div>
-
-        <div class="program-container wow fadeIn">
-          <div class="program-img">
-            <img src="img/programs/middle.jpg" alt="Средняя школа" />
-          </div>
-          <div class="program-content">
-            <h3>Профильное обучение</h3>
-            <p>Старшеклассники могут выбрать одно из трех направлений для углубленного изучения.</p>
-
-            <div class="program-tabs">
-              <div class="tab-buttons">
-                <button class="tab-btn active" data-tab="stem">STEM</button>
-                <button class="tab-btn" data-tab="humanities">Гуманитарное</button>
-                <button class="tab-btn" data-tab="business">Бизнес</button>
-              </div>
-
-              <div class="tab-content">
-                <div id="stem" class="tab-pane active">
-                  <p>Углубленное изучение математики, физики, программирования и робототехники.</p>
+              <div class="program-features">
+                <div class="feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Развитие речи и логики</span>
                 </div>
-                <div id="humanities" class="tab-pane">
-                  <p>Литература, история, иностранные языки и журналистика.</p>
+                <div class="feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Подготовка к школе</span>
                 </div>
-                <div id="business" class="tab-pane">
-                  <p>Основы экономики, предпринимательства и финансовой грамотности.</p>
+                <div class="feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Творческие занятия</span>
                 </div>
               </div>
-            </div>
 
-            <button class="cta-button">Узнать подробнее</button>
+              <button class="cta-button">Узнать подробнее</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
-  <!-- После секции с программами -->
-  <section class="appointment-section section-padding bg-light">
-    <div class="container">
-      <div class="section-header wow fadeIn">
-        <h2 data-translate="appointment-title">Записаться на экскурсию</h2>
-        <div class="divider"></div>
-        <p data-translate="appointment-subtitle">Посетите нашу школу лично</p>
-      </div>
+      </section>
 
-      <div class="appointment-form wow fadeIn">
-        <form id="schoolTourForm" action="/api/appointment" method="POST">
-          <div class="form-group">
-            <label for="name" data-translate="form-name">Ваше имя</label>
-            <input type="text" id="name" name="name" required>
+      <!-- Начальная школа -->
+      <section id="elementary" class="section-padding bg-light">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Начальная школа</h2>
+            <div class="divider"></div>
+            <p>1-4 классы</p>
           </div>
 
-          <div class="form-row">
+          <div class="program-container reverse wow fadeIn">
+            <div class="program-img">
+              <img src="img/programs/elementary.jpg" alt="Начальная школа" />
+            </div>
+            <div class="program-content">
+              <h3>Фундаментальные знания</h3>
+              <p>Программа начальной школы сочетает традиционные методы обучения с современными технологиями.</p>
+
+              <div class="program-features">
+                <div class="feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Углубленное изучение языков</span>
+                </div>
+                <div class="feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Проектная деятельность</span>
+                </div>
+                <div class="feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>IT-грамотность с 1 класса</span>
+                </div>
+              </div>
+
+              <button class="cta-button">Узнать подробнее</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Средняя школа -->
+      <section id="middle" class="section-padding">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Средняя школа</h2>
+            <div class="divider"></div>
+            <p>5-11 классы</p>
+          </div>
+
+          <div class="program-container wow fadeIn">
+            <div class="program-img">
+              <img src="img/programs/middle.jpg" alt="Средняя школа" />
+            </div>
+            <div class="program-content">
+              <h3>Профильное обучение</h3>
+              <p>Старшеклассники могут выбрать одно из трех направлений для углубленного изучения.</p>
+
+              <div class="program-tabs">
+                <div class="tab-buttons">
+                  <button class="tab-btn active" data-tab="stem">STEM</button>
+                  <button class="tab-btn" data-tab="humanities">Гуманитарное</button>
+                  <button class="tab-btn" data-tab="business">Бизнес</button>
+                </div>
+
+                <div class="tab-content">
+                  <div id="stem" class="tab-pane active">
+                    <p>Углубленное изучение математики, физики, программирования и робототехники.</p>
+                  </div>
+                  <div id="humanities" class="tab-pane">
+                    <p>Литература, история, иностранные языки и журналистика.</p>
+                  </div>
+                  <div id="business" class="tab-pane">
+                    <p>Основы экономики, предпринимательства и финансовой грамотности.</p>
+                  </div>
+                </div>
+              </div>
+
+              <button class="cta-button">Узнать подробнее</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- После секции с программами -->
+    <section class="appointment-section section-padding bg-light">
+      <div class="container">
+        <div class="section-header wow fadeIn">
+          <h2 data-translate="appointment-title">Записаться на экскурсию</h2>
+          <div class="divider"></div>
+          <p data-translate="appointment-subtitle">Посетите нашу школу лично</p>
+        </div>
+
+        <div class="appointment-form wow fadeIn">
+          <form id="schoolTourForm" action="/api/appointment" method="POST">
             <div class="form-group">
-              <label for="phone" data-translate="form-phone">Телефон</label>
-              <input type="tel" id="phone" name="phone" required>
+              <label for="name" data-translate="form-name">Ваше имя</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone" data-translate="form-phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" required />
+              </div>
+
+              <div class="form-group">
+                <label for="date" data-translate="form-date">Дата посещения</label>
+                <input type="date" id="date" name="date" min="" required />
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="date" data-translate="form-date">Дата посещения</label>
-              <input type="date" id="date" name="date" min="" required>
+              <label for="program" data-translate="form-program">Интересующая программа</label>
+              <select id="program" name="program">
+                <option value="kindergarten" data-translate="program-kg">Детский сад</option>
+                <option value="elementary" data-translate="program-elem">Начальная школа</option>
+                <option value="middle" data-translate="program-middle">Средняя школа</option>
+              </select>
+            </div>
+
+            <button type="submit" class="cta-button" data-translate="form-submit">Отправить заявку</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Подвал (такой же как на главной) -->
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Контакты</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район</p>
+            <p><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</p>
+            <p><i class="fas fa-envelope"></i> info@schoolacademy.uz</p>
+          </div>
+          <div class="footer-column">
+            <h3>Соцсети</h3>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-telegram"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
             </div>
           </div>
-
-          <div class="form-group">
-            <label for="program" data-translate="form-program">Интересующая программа</label>
-            <select id="program" name="program">
-              <option value="kindergarten" data-translate="program-kg">Детский сад</option>
-              <option value="elementary" data-translate="program-elem">Начальная школа</option>
-              <option value="middle" data-translate="program-middle">Средняя школа</option>
-            </select>
-          </div>
-
-          <button type="submit" class="cta-button" data-translate="form-submit">
-            Отправить заявку
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-  <!-- Подвал (такой же как на главной) -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>Контакты</h3>
-          <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район</p>
-          <p><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</p>
-          <p><i class="fas fa-envelope"></i> info@schoolacademy.uz</p>
-        </div>
-        <div class="footer-column">
-          <h3>Соцсети</h3>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-telegram"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <div class="footer-column">
+            <h3>Часы работы</h3>
+            <p>Пн-Пт: 8:00 - 18:00</p>
+            <p>Сб: 9:00 - 14:00</p>
+            <p>Вс: выходной</p>
           </div>
         </div>
-        <div class="footer-column">
-          <h3>Часы работы</h3>
-          <p>Пн-Пт: 8:00 - 18:00</p>
-          <p>Сб: 9:00 - 14:00</p>
-          <p>Вс: выходной</p>
+        <div class="copyright">
+          <p>© 2024 School Academy. Все права защищены.</p>
         </div>
       </div>
-      <div class="copyright">
-        <p>© 2024 School Academy. Все права защищены.</p>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/language.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-  <script>
-    new WOW().init();
+    <script src="js/main.js"></script>
+    <script src="js/language.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>
+      new WOW().init();
 
-    // Табы для программ
-    document.querySelectorAll(".tab-btn").forEach((btn) => {
-      btn.addEventListener("click", function () {
-        const tabId = this.getAttribute("data-tab");
+      // Табы для программ
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const tabId = this.getAttribute("data-tab");
 
-        // Удаляем активный класс у всех кнопок и контента
-        document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
-        document.querySelectorAll(".tab-pane").forEach((p) => p.classList.remove("active"));
+          // Удаляем активный класс у всех кнопок и контента
+          document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+          document.querySelectorAll(".tab-pane").forEach((p) => p.classList.remove("active"));
 
-        // Добавляем активный класс текущей кнопке и соответствующему контенту
-        this.classList.add("active");
-        document.getElementById(tabId).classList.add("active");
+          // Добавляем активный класс текущей кнопке и соответствующему контенту
+          this.classList.add("active");
+          document.getElementById(tabId).classList.add("active");
+        });
       });
-    });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

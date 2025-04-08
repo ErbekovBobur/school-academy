@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Academy | {%PAGE_TITLE%}</title>
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/css/style.css" as="style" />
+    <link rel="preload" href="/js/main.js" as="script" />
+    <link rel="preload" href="/img/logo-uz.png" as="image" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/animate.css" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/logo-uz.png" type="image/x-icon" />
+
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1e88e5" />
+  </head>
+
+  <body>
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main content -->
+    <main class="content-wrapper">{%CONTENT%}</main>
+
+    <!-- Footer placeholder -->
+    <footer id="footer-placeholder"></footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js" defer></script>
+    <script src="/js/language.js" defer></script>
+  </body>
+</html>

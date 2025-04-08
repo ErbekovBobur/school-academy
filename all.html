@@ -1,83 +1,66 @@
-<!-- program.html -->
+приведи в порядок, устрани повторы и оптимизируй код - // sw.js - const CACHE_NAME = 'school-academy-v1.2'; const OFFLINE_URL = '/offline.html'; const urlsToCache = [ '/',
+'/index.html', '/css/style.css', '/js/main.js', '/img/logo-uz.png', '/img/banner-tashkent.jpg', '/offline.html' ];
+self.addEventListener('install', event => { event.waitUntil( caches.open(CACHE_NAME) .then(cache => { return
+cache.addAll(urlsToCache); }) ); }); self.addEventListener('fetch', event => { if (event.request.mode === 'navigate') {
+event.respondWith( fetch(event.request) .catch(() => caches.match(OFFLINE_URL)) ); } else { event.respondWith(
+caches.match(event.request) .then(response => { return response || fetch(event.request); }) ); } }); // program.html
+
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Программы | School Academy</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="js/main.js" as="script" />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      as="style"
+      crossorigin
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
+
+    <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="./css/phone.css" />
+    <link rel="stylesheet" href="./css/lang.css" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script src="js/analytics.js" defer></script>
+    <script src="js/language.js" defer></script>
+
+    <noscript>
+      <div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position: absolute; left: -9999px" alt="" /></div>
+    </noscript>
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1e88e5" />
   </head>
+
   <body>
     <!-- Шапка (такая же как на главной) -->
     <div id="header-placeholder"></div>
 
     <script>
-      fetch("header.html")
+      // Модифицируем ваш скрипт загрузки header
+      fetch("./partials/header.html")
         .then((response) => response.text())
         .then((data) => {
           document.getElementById("header-placeholder").innerHTML = data;
+
+          // После загрузки header добавляем логику active ссылки
+          const currentPage = window.location.pathname.split("/").pop() || "index.html";
+          const navLinks = document.querySelectorAll("nav ul li a");
+
+          navLinks.forEach((link) => {
+            const linkPage = link.getAttribute("href").split("/").pop();
+            if (linkPage === currentPage) {
+              link.classList.add("active");
+            }
+          });
         });
     </script>
-
-    <!-- <header class="sticky-header">
-      <div class="header-container">
-        <div class="logo-container">
-          <img src="img/logo-uz.png" alt="School Academy" class="logo" />
-          <div class="school-info">
-            <h1>School Academy</h1>
-            <p>Ташкент, Юнусабадский район</p>
-          </div>
-        </div>
-
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html" class="nav-link">Главная</a></li>
-            <li class="dropdown">
-              <a href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="about.html#history" class="nav-link">История</a></li>
-                <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
-                <li><a href="about.html#gallery" class="nav-link">Галерея</a></li>
-                <li><a href="about.html#mission" class="nav-link">Миссия</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="program.html" class="active nav-link"
-                >Программы <i class="fas fa-chevron-down dropdown-icon"></i
-              ></a>
-              <ul class="dropdown-menu">
-                <li><a href="#kindergarten" class="nav-link">Детский сад</a></li>
-                <li><a href="#elementary" class="nav-link">Начальная школа</a></li>
-                <li><a href="#middle" class="nav-link">Средняя школа</a></li>
-              </ul>
-            </li>
-            <li><a href="contacts.html" class="nav-link">Контакты</a></li>
-          </ul>
-        </nav>
-
-        <div class="header-right">
-          <div class="lang-switcher">
-            <button class="lang-btn active">РУ</button>
-            <button class="lang-btn">UZ</button>
-          </div>
-          <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div>
-        </div>
-
-        <button class="mobile-menu-btn">
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-        </button>
-      </div>
-    </header> -->
 
     <!-- Основной контент -->
     <main class="content-wrapper">
@@ -200,7 +183,48 @@
         </div>
       </section>
     </main>
+    <!-- После секции с программами -->
+    <section class="appointment-section section-padding bg-light">
+      <div class="container">
+        <div class="section-header wow fadeIn">
+          <h2 data-translate="appointment-title">Записаться на экскурсию</h2>
+          <div class="divider"></div>
+          <p data-translate="appointment-subtitle">Посетите нашу школу лично</p>
+        </div>
 
+        <div class="appointment-form wow fadeIn">
+          <form id="schoolTourForm" action="/api/appointment" method="POST">
+            <div class="form-group">
+              <label for="name" data-translate="form-name">Ваше имя</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone" data-translate="form-phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" required />
+              </div>
+
+              <div class="form-group">
+                <label for="date" data-translate="form-date">Дата посещения</label>
+                <input type="date" id="date" name="date" min="" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="program" data-translate="form-program">Интересующая программа</label>
+              <select id="program" name="program">
+                <option value="kindergarten" data-translate="program-kg">Детский сад</option>
+                <option value="elementary" data-translate="program-elem">Начальная школа</option>
+                <option value="middle" data-translate="program-middle">Средняя школа</option>
+              </select>
+            </div>
+
+            <button type="submit" class="cta-button" data-translate="form-submit">Отправить заявку</button>
+          </form>
+        </div>
+      </div>
+    </section>
     <!-- Подвал (такой же как на главной) -->
     <footer class="main-footer">
       <div class="container">
@@ -256,309 +280,321 @@
   </body>
 </html>
 
-
-<!-- index.html -->
+<!-- offline.html -->
 
 <!DOCTYPE html>
-<html lang="ru" dir="ltr">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School Academy | Ташкент</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />    
-    <link rel="stylesheet" href="./css/phone.css">
-    <link rel="stylesheet" href="./css/lang.css">
+    <title>School Academy (Оффлайн)</title>
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        background: #f5f5f5;
+      }
+
+      .offline-container {
+        max-width: 500px;
+        padding: 30px;
+      }
+
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+
+      p {
+        color: #7f8c8d;
+        margin-bottom: 30px;
+      }
+
+      .reload-btn {
+        background: #1e88e5;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    </style>
   </head>
+
   <body>
-    <!-- Шапка -->
-    <header class="sticky-header">
-      <div class="header-container">
-        <div class="logo-container">
-          <img src="img/logo-uz.png" alt="School Academy" class="logo" />
-          <div class="school-info">
-            <h1>School Academy</h1>
-            <p>Ташкент, Юнусабадский район</p>
-          </div>
-        </div>
+    <div class="offline-container">
+      <h1>Вы в оффлайн-режиме</h1>
+      <p>Для просмотра этой страницы требуется интернет-соединение.</p>
+      <button class="reload-btn" onclick="window.location.reload()">Повторить попытку</button>
+    </div>
+  </body>
+</html>
 
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html" class="active nav-link">Главная</a></li>
-            <li class="dropdown">
-              <a href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="about.html#history" class="nav-link">История</a></li>
-                <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
-                <li><a href="about.html#gallery" class="nav-link">Галерея</a></li>
-                <li><a href="about.html#mission" class="nav-link">Миссия</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="program.html" class="nav-link">Программы <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="program.html#kindergarten" class="nav-link">Детский сад</a></li>
-                <li><a href="program.html#elementary" class="nav-link">Начальная школа</a></li>
-                <li><a href="program.html#middle" class="nav-link">Средняя школа</a></li>
-              </ul>
-            </li>
-            <li><a href="contacts.html" class="nav-link">Контакты</a></li>
-          </ul>
-        </nav>
+<!-- manifest.webmanifest -->
 
-        <div class="header-right">
-          <!-- =lang=======11111111========= -->
-          <!-- <div class="lang-switcher">
-            <button class="lang-btn active">РУ</button>
-            <button class="lang-btn">UZ</button>
-          </div> -->
-          <!-- ======2222222222====== -->
-          <div class="language-switcher">
-            <button class="lang-btn active" data-lang="ru">РУ</button>
-            <button class="lang-btn" data-lang="uz">UZ</button>
-            <span class="lang-slider"></span>
-          </div>
-          <!-- ===Phone===== -->
-          <!-- <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div> -->
-           <!-- ================+1111111111+================ -->
-           <!-- <div class="phone-container">
-            <div class="phone-wrapper">
-              <div class="phone-icon">
-                <i class="fas fa-phone-alt"></i>
-              </div>
-              <a href="tel:+998711234567" class="phone-link">
-                <span class="phone-number">+998 (71) 123-45-67</span>
-                <span class="phone-call-text">Позвонить сейчас</span>
-              </a>
-            </div>
-            <div class="phone-ripple"></div>
-          </div> -->
-          <!-- ==============222222222222222================ -->
-          <!-- <div class="modern-phone">
-            <div class="phone-icon-circle">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <a href="tel:+998711234567" class="phone-content">
-              <span class="phone-number">+998 (71) 123-45-67</span>
-              <span class="phone-label">Звонок бесплатный</span>
-            </a>
-          </div> -->
-          <!-- ============3333333333333============== -->
-          <!-- <div class="pulsing-phone-element">
-            <div class="pulsing-phone-icon">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <a href="tel:+998711234567" class="pulsing-phone-link">
-              <span class="pulsing-phone-number">+998 (71) 123-45-67</span>
-              <span class="phone-call-action">Доступно 24/7</span>
-            </a>
-          </div> -->
-          <!-- =========444444444444======== -->
-          <!-- <div class="animated-phone-element">
-            <div class="phone-icon-pulse">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <a href="tel:+998711234567" class="phone-link-motion">
-              <span class="phone-number-bounce">+998 (71) 123-45-67</span>
-              <span class="phone-call-hint">Нажмите для звонка</span>
-            </a>
-          </div> -->
-          <!-- =========5555555555====== -->
-          <div class="minimal-phone">
-            <div class="phone-pulse-icon">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <a href="tel:+998711234567" class="bouncing-phone-number">+998 (71) 123-45-67</a>
-          </div>
-          <!-- --------------- -->
-        </div>
+{
+    "name": "School Academy",
+    "short_name": "SchoolAcademy",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#1e88e5",
+    "icons": [
+        {
+            "src": "/img/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
 
-        <button class="mobile-menu-btn">
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-        </button>
-      </div>
-    </header>
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
 
-    <!-- Основной контент -->
-    <main class="content-wrapper">      
-      <!-- Баннер -->
-      <section class="hero-banner">
-        <div class="banner-overlay"></div>
-        <div class="banner-content">
-          <h1 class="wow fadeInUp" data-wow-delay="0.2s">Качественное образование <span>в Ташкенте</span></h1>
-          <p class="wow fadeInUp" data-wow-delay="0.4s">Лицензия МНО РУз №12345 | Юнусабадский район</p>
-          <!-- <button class="cta-button wow fadeInUp" data-wow-delay="0.6s">Записаться на экскурсию</button> -->
-          <a 
-          href="https://t.me/Shkolnayakademiya" 
-          class="cta-button wow fadeInUp" 
-          data-wow-delay="0.6s"
-          target="_blank"
-          rel="noopener noreferrer"
-      >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Academy | Ташкент</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
+    crossorigin>
+  <!-- <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x"> -->
+  <link rel="shortcut icon" href="img/logo-uz.png" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animate.css" />
+  <link rel="stylesheet" href="css/phone.css">
+  <link rel="stylesheet" href="css/lang.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- <script src="js/language.js" defer></script> -->
+
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script src="js/analytics.js" defer></script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position:absolute; left:-9999px;" alt="" /></div>
+  </noscript> -->
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#1e88e5">
+
+</head>
+
+<body>
+  <!-- Шапка -->
+  <div id="header-placeholder"></div>
+
+  <script>
+    // Модифицируем скрипт загрузки header
+    fetch("./partials/header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("header-placeholder").innerHTML = data;
+
+        // Улучшенная логика определения активной страницы
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll("nav ul li a:not(.dropdown-menu li a)"); // Исключаем ссылки выпадающего меню
+
+        navLinks.forEach((link) => {
+          const linkPath = link.getAttribute("href");
+
+          // Удаляем класс active у всех ссылок
+          link.classList.remove("active");
+
+          // Сравниваем пути
+          const isIndexPage = currentPath.endsWith('/') ||
+            currentPath.endsWith('index.html') ||
+            currentPath === '';
+
+          if ((isIndexPage && linkPath === 'index.html') ||
+            (!isIndexPage && currentPath.includes(linkPath.replace('.html', '')))) {
+            link.classList.add("active");
+          }
+        });
+
+        // Инициализация мобильного меню (если нужно)
+        document.querySelector(".mobile-menu-btn")?.addEventListener("click", () => {
+          document.querySelector(".main-nav").classList.toggle("show-mobile");
+        });
+      })
+      .catch((error) => {
+        console.error("Error loading header:", error);
+      });
+  </script>
+
+  <!-- Основной контент -->
+  <main class="content-wrapper">
+    <!-- Баннер -->
+    <section class="hero-banner">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Качественное образование <span>в Ташкенте</span></h1>
+        <p class="wow fadeInUp" data-wow-delay="0.4s">Лицензия МНО РУз №12345 | Юнусабадский район</p>
+        <!-- <button class="cta-button wow fadeInUp" data-wow-delay="0.6s">Записаться на экскурсию</button> -->
+        <a href="https://t.me/Shkolnayakademiya" class="cta-button wow fadeInUp" data-wow-delay="0.6s" target="_blank"
+          rel="noopener noreferrer">
           Записаться на экскурсию
-      </a>
+        </a>
+      </div>
+      <div class="scroll-down">
+        <div class="mouse">
+          <div class="scroller"></div>
         </div>
-        <div class="scroll-down">
-          <div class="mouse">
-            <div class="scroller"></div>
-          </div>
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- О школе -->
-      <section class="about-section section-padding">
-        <div class="container">
-          <div class="section-header wow fadeIn">
-            <h2>Наша школа</h2>
-            <div class="divider"></div>
-            <p>Уникальное пространство для развития</p>
-          </div>
-
-          <div class="features-grid">
-            <div class="feature-card wow fadeIn" data-wow-delay="0.2s">
-              <div class="feature-icon">
-                <i class="fas fa-user-graduate"></i>
-              </div>
-              <h3>Индивидуальный подход</h3>
-              <p>Программы адаптированы под способности каждого ученика</p>
-            </div>
-
-            <div class="feature-card wow fadeIn" data-wow-delay="0.4s">
-              <div class="feature-icon">
-                <i class="fas fa-laptop-code"></i>
-              </div>
-              <h3>IT-классы</h3>
-              <p>Современные компьютерные лаборатории</p>
-            </div>
-
-            <div class="feature-card wow fadeIn" data-wow-delay="0.6s">
-              <div class="feature-icon">
-                <i class="fas fa-medal"></i>
-              </div>
-              <h3>Подготовка в вузы</h3>
-              <p>90% выпускников поступают в топ-вузы</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Новости -->
-      <section class="news-section section-padding bg-light">
-        <div class="container">
-          <div class="section-header wow fadeIn">
-            <h2>Последние новости</h2>
-            <div class="divider"></div>
-            <p>Будьте в курсе наших событий</p>
-          </div>
-
-          <div class="news-grid">
-            <div class="news-card wow fadeIn" data-wow-delay="0.2s">
-              <div class="news-img" style="background-image: url('img/news1.jpg')"></div>
-              <div class="news-content">
-                <span class="news-date">15 мая 2024</span>
-                <h3>Открытие STEM-лаборатории</h3>
-                <p>Новое оборудование для изучения робототехники и программирования</p>
-                <a href="#" class="read-more">Подробнее <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-
-            <div class="news-card wow fadeIn" data-wow-delay="0.4s">
-              <div class="news-img" style="background-image: url('img/news2.jpg')"></div>
-              <div class="news-content">
-                <span class="news-date">10 мая 2024</span>
-                <h3>Победа в олимпиаде</h3>
-                <p>Наши ученики заняли первые места по математике и физике</p>
-                <a href="#" class="read-more">Подробнее <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Подвал -->
-    <footer class="main-footer">
+    <!-- О школе -->
+    <section class="about-section section-padding">
       <div class="container">
-        <div class="footer-content">
-          <div class="footer-column">
+        <div class="section-header wow fadeIn">
+          <h2>Наша школа</h2>
+          <div class="divider"></div>
+          <p>Уникальное пространство для развития</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card wow fadeIn" data-wow-delay="0.2s">
+            <div class="feature-icon">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <h3>Индивидуальный подход</h3>
+            <p>Программы адаптированы под способности каждого ученика</p>
+          </div>
+
+          <div class="feature-card wow fadeIn" data-wow-delay="0.4s">
+            <div class="feature-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3>IT-классы</h3>
+            <p>Современные компьютерные лаборатории</p>
+          </div>
+
+          <div class="feature-card wow fadeIn" data-wow-delay="0.6s">
+            <div class="feature-icon">
+              <i class="fas fa-medal"></i>
+            </div>
+            <h3>Подготовка в вузы</h3>
+            <p>90% выпускников поступают в топ-вузы</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Новости -->
+    <section class="news-section section-padding bg-light">
+      <div class="container">
+        <div class="section-header wow fadeIn">
+          <h2>Последние новости</h2>
+          <div class="divider"></div>
+          <p>Будьте в курсе наших событий</p>
+        </div>
+
+        <div class="news-grid">
+          <div class="news-card wow fadeIn" data-wow-delay="0.2s">
+            <div class="news-img" style="background-image: url('img/news1.jpg')"></div>
+            <div class="news-content">
+              <span class="news-date">15 мая 2024</span>
+              <h3>Открытие STEM-лаборатории</h3>
+              <p>Новое оборудование для изучения робототехники и программирования</p>
+              <a href="#" class="read-more">Подробнее <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="news-card wow fadeIn" data-wow-delay="0.4s">
+            <div class="news-img" style="background-image: url('img/news2.jpg')"></div>
+            <div class="news-content">
+              <span class="news-date">10 мая 2024</span>
+              <h3>Победа в олимпиаде</h3>
+              <p>Наши ученики заняли первые места по математике и физике</p>
+              <a href="#" class="read-more">Подробнее <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
           <h3>Часы работы</h3>
           <p>Пн-Пт: 8:00 - 18:00</p>
           <!-- <p>Сб: 9:00 - 14:00</p> -->
           <p>Вс: выходной</p>
-          </div>
-          <div class="footer-column">
-            <h3>Адрес</h3>
-            <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район, массив Юнусабад, 7-й квартал, 16/1</p>
-          </div>
-          <div class="footer-column">
-            <h3>Контакты</h3>
-            <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район</p>
-            <p><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</p>
-            <p><i class="fas fa-envelope"></i> info@schoolacademy.uz</p>
-          </div>
-          <div class="footer-column">
-            <h3>Соцсети</h3>
-            <div class="social-links">
-              <a href="https://t.me/Shkolnayakademiya"><i class="fab fa-telegram"></i></a>
-              <a href="https://www.instagram.com/shkolnayakademiya/"><i class="fab fa-instagram"></i></a>
-              <a href="https://www.facebook.com/NOUShkolnayaAkademiya/?locale=ru_RU"><i class="fab fa-facebook-f"></i></a>
-            </div>
-          </div>
-          <!-- <div class="footer-column"></div> -->
         </div>
-        <!-- <div class="footer-column" style="position: relative"> -->
-        <div class="footer-map">
-          <a
-            href="https://yandex.uz/maps/org/97045873646/?utm_medium=mapframe&utm_source=maps"
-            style="color: #eee; font-size: 12px; position: absolute; top: 0px"
-            >Школьная академия</a
-          ><a
-            href="https://yandex.uz/maps/10335/tashkent/category/private_school/184106252/?utm_medium=mapframe&utm_source=maps"
-            style="color: #eee; font-size: 12px; position: absolute; top: 14px"
-            >Частная школа в Ташкенте</a
-          >
-          <iframe
-            src="https://yandex.uz/map-widget/v1/?ll=69.272024%2C41.370359&mode=poi&poi%5Bpoint%5D=69.271655%2C41.371280&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D97045873646&z=17.94"
-            width="600"
-            height="500"
-            frameborder="1"
-            allowfullscreen="true"
-            style="position: relative"
-          >
-          </iframe>
-        </div>        
-        
+        <div class="footer-column">
+          <h3>Адрес</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район, массив Юнусабад, 7-й квартал, 16/1</p>
         </div>
-        <div class="copyright">
-          <p>© 2024 School Academy. Все права защищены.</p>
+        <div class="footer-column">
+          <h3>Контакты</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Ташкент, Юнусабадский район</p>
+          <p><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</p>
+          <p><i class="fas fa-envelope"></i> info@schoolacademy.uz</p>
         </div>
+        <div class="footer-column">
+          <h3>Соцсети</h3>
+          <div class="social-links">
+            <a href="https://t.me/Shkolnayakademiya"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.instagram.com/shkolnayakademiya/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/NOUShkolnayaAkademiya/?locale=ru_RU"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <!-- <div class="footer-column"></div> -->
       </div>
-    </footer>
-<script src="./js/ya.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/language.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script>
+      <!-- <div class="footer-column" style="position: relative"> -->
+      <!-- <div class="footer-map">
+        <a href="https://yandex.uz/maps/org/97045873646/?utm_medium=mapframe&utm_source=maps"
+          style="color: #eee; font-size: 12px; position: absolute; top: 0px">Школьная академия</a><a
+          href="https://yandex.uz/maps/10335/tashkent/category/private_school/184106252/?utm_medium=mapframe&utm_source=maps"
+          style="color: #eee; font-size: 12px; position: absolute; top: 14px">Частная школа в Ташкенте</a>
+        <iframe
+          src="https://yandex.uz/map-widget/v1/?ll=69.272024%2C41.370359&mode=poi&poi%5Bpoint%5D=69.271655%2C41.371280&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D97045873646&z=17.94"
+          width="600" height="500" frameborder="1" allowfullscreen="true" style="position: relative">
+        </iframe>
+      </div> -->
+
+    </div>
+    <div class="copyright">
+      <p>© 2024 School Academy. Все права защищены.</p>
+    </div>
+    </div>
+  </footer>
+  <script src="./js/ya.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/main-v2.js"></script>
+  <script src="js/form-validation.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
       new WOW({
         boxClass: "wow",
         animateClass: "animated",
         offset: 50,
         mobile: true,
       }).init();
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
 
-<!-- contacts.html -->
+<!-- contacts.html  -->
 
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
@@ -566,67 +602,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Контакты | School Academy</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="js/main.js" as="script" />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      as="style"
+      crossorigin
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
+
+    <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="./css/phone.css" />
+    <link rel="stylesheet" href="./css/lang.css" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script src="js/analytics.js" defer></script>
+    <script src="js/language.js" defer></script>
+
+    <noscript>
+      <div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position: absolute; left: -9999px" alt="" /></div>
+    </noscript>
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1e88e5" />
   </head>
   <body>
     <!-- Шапка (такая же как на главной) -->
-    <header class="sticky-header">
-      <div class="header-container">
-        <div class="logo-container">
-          <img src="img/logo-uz.png" alt="School Academy" class="logo" />
-          <div class="school-info">
-            <h1>School Academy</h1>
-            <p>Ташкент, Юнусабадский район</p>
-          </div>
-        </div>
+    <div id="header-placeholder"></div>
 
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html" class="nav-link">Главная</a></li>
-            <li class="dropdown">
-              <a href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="about.html#history" class="nav-link">История</a></li>
-                <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
-                <li><a href="about.html#gallery" class="nav-link">Галерея</a></li>
-                <li><a href="about.html#mission" class="nav-link">Миссия</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="program.html" class="nav-link">Программы <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="program.html#kindergarten" class="nav-link">Детский сад</a></li>
-                <li><a href="program.html#elementary" class="nav-link">Начальная школа</a></li>
-                <li><a href="program.html#middle" class="nav-link">Средняя школа</a></li>
-              </ul>
-            </li>
-            <li><a href="contacts.html" class="active nav-link">Контакты</a></li>
-          </ul>
-        </nav>
+    <script>
+      // Модифицируем ваш скрипт загрузки header
+      fetch("./partials/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
 
-        <div class="header-right">
-          <div class="lang-switcher">
-            <button class="lang-btn active">РУ</button>
-            <button class="lang-btn">UZ</button>
-          </div>
-          <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div>
-        </div>
+          // После загрузки header добавляем логику active ссылки
+          const currentPage = window.location.pathname.split("/").pop() || "index.html";
+          const navLinks = document.querySelectorAll("nav ul li a");
 
-        <button class="mobile-menu-btn">
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-        </button>
-      </div>
-    </header>
+          navLinks.forEach((link) => {
+            const linkPage = link.getAttribute("href").split("/").pop();
+            if (linkPage === currentPage) {
+              link.classList.add("active");
+            }
+          });
+        });
+    </script>
 
     <!-- Основной контент -->
     <main class="content-wrapper">
@@ -683,74 +708,64 @@
 </html>
 
 <!-- about.html -->
+
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>О школе | School Academy</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="preload" href="js/main.js" as="script" />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      as="style"
+      crossorigin
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/phone.css" />
+
+    <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="./css/phone.css" />
+    <link rel="stylesheet" href="./css/lang.css" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script src="js/analytics.js" defer></script>
+    <script src="js/language.js" defer></script>
+
+    <noscript>
+      <div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position: absolute; left: -9999px" alt="" /></div>
+    </noscript>
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1e88e5" />
   </head>
+
   <body>
     <!-- Шапка (такая же как на главной) -->
-    <header class="sticky-header">
-      <div class="header-container">
-        <div class="logo-container">
-          <img src="img/logo-uz.png" alt="School Academy" class="logo" />
-          <div class="school-info">
-            <h1>School Academy</h1>
-            <p>Ташкент, Юнусабадский район</p>
-          </div>
-        </div>
+    <div id="header-placeholder"></div>
 
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html" class="nav-link">Главная</a></li>
-            <li class="dropdown">
-              <a href="about.html" class="active nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="#history" class="nav-link">История</a></li>
-                <li><a href="#teachers" class="nav-link">Преподаватели</a></li>
-                <li><a href="#gallery" class="nav-link">Галерея</a></li>
-                <li><a href="#mission" class="nav-link">Миссия</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="program.html" class="nav-link">Программы <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="program.html#kindergarten" class="nav-link">Детский сад</a></li>
-                <li><a href="program.html#elementary" class="nav-link">Начальная школа</a></li>
-                <li><a href="program.html#middle" class="nav-link">Средняя школа</a></li>
-              </ul>
-            </li>
-            <li><a href="contacts.html" class="nav-link">Контакты</a></li>
-          </ul>
-        </nav>
+    <script>
+      // Модифицируем ваш скрипт загрузки header
+      fetch("./partials/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
 
-        <div class="header-right">
-          <div class="lang-switcher">
-            <button class="lang-btn active">РУ</button>
-            <button class="lang-btn">UZ</button>
-          </div>
-          <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div>
-        </div>
+          // После загрузки header добавляем логику active ссылки
+          const currentPage = window.location.pathname.split("/").pop() || "index.html";
+          const navLinks = document.querySelectorAll("nav ul li a");
 
-        <button class="mobile-menu-btn">
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-        </button>
-      </div>
-    </header>
+          navLinks.forEach((link) => {
+            const linkPage = link.getAttribute("href").split("/").pop();
+            if (linkPage === currentPage) {
+              link.classList.add("active");
+            }
+          });
+        });
+    </script>
 
     <!-- Основной контент -->
     <main class="content-wrapper">
@@ -928,9 +943,155 @@
     </script>
   </body>
 </html>
+<!--
+git checkout -b имя-новой-ветки
 
-<!-- main.js -->
-document.addEventListener("DOMContentLoaded", function () {
+git add .
+git commit -m "Ваше сообщение о коммите"
+git push origin fixBug
+-->
+
+<!-- .htaccess -->
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+    AddOutputFilterByType DEFLATE application/javascript text/javascript
+    AddOutputFilterByType DEFLATE text/xml application/xml image/svg+xml
+</IfModule>
+
+<!-- header.html -->
+<header class="sticky-header">
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="img/logo-uz.png" alt="School Academy" class="logo" />
+        <div class="school-info">
+          <h1>School Academy</h1>
+          <p>Ташкент, Юнусабадский район</p>
+        </div>
+      </div>
+  
+      <nav class="main-nav">
+        <ul>
+          <li><a data-translate="nav-home" href="index.html" class="nav-link">Главная</a></li>
+          <li class="dropdown">
+            <a data-translate="nav-about" href="about.html" class="nav-link"
+              >О школе <i class="fas fa-chevron-down dropdown-icon"></i
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="about.html#history" class="nav-link">История</a></li>
+              <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
+              <li><a href="about.html#gallery" class="nav-link">Галерея</a></li>
+              <li><a href="about.html#mission" class="nav-link">Миссия</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="program.html" class="nav-link">Программы <i class="fas fa-chevron-down dropdown-icon"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="program.html#kindergarten" class="nav-link">Детский сад</a></li>
+              <li><a href="program.html#elementary" class="nav-link">Начальная школа</a></li>
+              <li><a href="program.html#middle" class="nav-link">Средняя школа</a></li>
+            </ul>
+          </li>
+          <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+        </ul>
+      </nav>
+  
+      <div class="header-right">
+        <!-- =lang=======11111111========= -->
+        <!-- <div class="lang-switcher">
+                <button class="lang-btn active">РУ</button>
+                <button class="lang-btn">UZ</button>
+              </div> -->
+        <!-- ======2222222222====== -->
+        <!--<div class="language-switcher">
+              <button class="lang-btn active" data-lang="ru">РУ</button>
+              <button class="lang-btn" data-lang="uz">UZ</button>
+              <span class="lang-slider"></span>
+            </div>-->
+        <!--3333333333333-->
+        <!-- Заменить переключатель языка на этот код -->
+        <div class="language-switcher">
+          <button class="lang-btn active" data-lang="ru" aria-label="Русский язык">РУ</button>
+          <button class="lang-btn" data-lang="uz" aria-label="O'zbek tili">UZ</button>
+          <span class="lang-slider"></span>
+        </div>
+        <!-- ===Phone===== -->
+        <!-- <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div> -->
+        <!-- ================+1111111111+================ -->
+        <!-- <div class="phone-container">
+                <div class="phone-wrapper">
+                  <div class="phone-icon">
+                    <i class="fas fa-phone-alt"></i>
+                  </div>
+                  <a href="tel:+998711234567" class="phone-link">
+                    <span class="phone-number">+998 (71) 123-45-67</span>
+                    <span class="phone-call-text">Позвонить сейчас</span>
+                  </a>
+                </div>
+                <div class="phone-ripple"></div>
+              </div> -->
+        <!-- ==============222222222222222================ -->
+        <!-- <div class="modern-phone">
+                <div class="phone-icon-circle">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <a href="tel:+998711234567" class="phone-content">
+                  <span class="phone-number">+998 (71) 123-45-67</span>
+                  <span class="phone-label">Звонок бесплатный</span>
+                </a>
+              </div> -->
+        <!-- ============3333333333333============== -->
+        <!-- <div class="pulsing-phone-element">
+                <div class="pulsing-phone-icon">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <a href="tel:+998711234567" class="pulsing-phone-link">
+                  <span class="pulsing-phone-number">+998 (71) 123-45-67</span>
+                  <span class="phone-call-action">Доступно 24/7</span>
+                </a>
+              </div> -->
+        <!-- =========444444444444======== -->
+        <!-- <div class="animated-phone-element">
+                <div class="phone-icon-pulse">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <a href="tel:+998711234567" class="phone-link-motion">
+                  <span class="phone-number-bounce">+998 (71) 123-45-67</span>
+                  <span class="phone-call-hint">Нажмите для звонка</span>
+                </a>
+              </div> -->
+        <!-- =========5555555555====== -->
+        <div class="minimal-phone">
+          <div class="phone-pulse-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <a href="tel:+998711234567" class="bouncing-phone-number">+998 (71) 123-45-67</a>
+        </div>
+        <!-- --------------- -->
+      </div>
+  
+      <button class="mobile-menu-btn" id="mobile-btn1">
+        <span class="menu-line"></span>
+        <span class="menu-line"></span>
+        <span class="menu-line"></span>
+      </button>
+    </div>
+  </header>
+  
+  <!-- main.js -->
+
+  /*document.addEventListener("DOMContentLoaded", function () {
     // Мобильное меню
     const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
     const mainNav = document.querySelector(".main-nav");
@@ -1019,92 +1180,451 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+  */
+  // Мобильное меню
+  let mobileMenuBtn;
+  let mainNav;
+  document.addEventListener("DOMContentLoaded", function () {
+    // Мобильное меню
+    mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+    mainNav = document.querySelector(".main-nav");
+  
+    mobileMenuBtn.addEventListener("click", function () {
+      this.classList.toggle("active");
+      mainNav.classList.toggle("active");
+      document.body.classList.toggle("no-scroll");
+    });
+  });
+  
+  function toggleMenu() {
+    const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
+    mobileMenuBtn.setAttribute("aria-expanded", !isExpanded);
+    mainNav.classList.toggle("active");
+    document.body.classList.toggle("no-scroll");
+  }
+  
+  mobileMenuBtn.addEventListener("click", toggleMenu);
+  
+  // Закрытие меню при клике вне его
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".main-nav") && !e.target.closest(".mobile-menu-btn")) {
+      mainNav.classList.remove("active");
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("no-scroll");
+    }
+  });
+  
+  // Плавный скролл с debounce
+  function smoothScroll(target) {
+    const element = document.querySelector(target);
+    if (element) {
+      const headerHeight = document.querySelector(".sticky-header").offsetHeight;
+      const offset = element.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+  
+      window.scrollTo({
+        top: offset,
+        behavior: "smooth",
+      });
+    }
+  }
+  
+  function debounce(func, wait) {
+    let timeout;
+    return function () {
+      const context = this,
+        args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
+  
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      smoothScroll(this.getAttribute("href"));
+    });
+  });
+  
+  // Фиксация шапки с оптимизацией
+  let lastScroll = 0;
+  const header = document.querySelector(".sticky-header");
+  
+  window.addEventListener(
+    "scroll",
+    debounce(() => {
+      const currentScroll = window.pageYOffset;
+  
+      if (currentScroll <= 0) {
+        header.style.boxShadow = "none";
+        return;
+      }
+  
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.style.transform = "translateY(-100%)";
+      } else {
+        header.style.transform = "translateY(0)";
+        header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
+      }
+  
+      lastScroll = currentScroll;
+    }, 15)
+  );
+  
+  // Инициализация WOW.js
+  // new WOW({
+  //   boxClass: "wow",
+  //   animateClass: "animated",
+  //   offset: 50,
+  //   mobile: true,
+  //   live: true,
+  // }).init();
+  //для формы обратной связи
+  // Инициализация календаря
+  function initCalendar() {
+    const dateInput = document.getElementById("date");
+    if (dateInput) {
+      // Блокируем выходные дни
+      dateInput.addEventListener("input", function () {
+        const selectedDate = new Date(this.value);
+        const day = selectedDate.getDay();
+  
+        if (day === 0 || day === 6) {
+          this.setCustomValidity("Выберите будний день");
+          this.reportValidity();
+          this.value = "";
+        } else {
+          this.setCustomValidity("");
+        }
+      });
+    }
+  }
+  
+  // Добавить в DOMContentLoaded
+  document.addEventListener("DOMContentLoaded", function () {
+    initCalendar();
+    // ... остальной код инициализации
+  });
+  // Регистрация Service Worker
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((registration) => {
+          console.log("ServiceWorker зарегистрирован:", registration.scope);
+        })
+        .catch((error) => {
+          console.log("Ошибка регистрации ServiceWorker:", error);
+        });
+    });
+  }
+  document.querySelectorAll(".dropdown").forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      const menu = item.querySelector(".dropdown-menu");
+      menu.style.display = "block";
+      menu.style.animation = "slideDown 0.3s ease-out forwards";
+    });
+  
+    item.addEventListener("mouseleave", () => {
+      const menu = item.querySelector(".dropdown-menu");
+      menu.style.animation = "";
+      setTimeout(() => {
+        menu.style.display = "none";
+      }, 300);
+    });
+  });
+  
+  // Мобильное меню
+  document.querySelector(".mobile-menu-btn").addEventListener("click", () => {
+    document.querySelector(".main-nav").classList.toggle("show-mobile");
+  });
 
   <!-- language.js -->
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const langButtons = document.querySelectorAll(".lang-btn");
-    const elementsToTranslate = {
-      title: {
-        РУ: "School Academy | Ташкент",
-        UZ: "School Academy | Toshkent",
-      },
-      welcome: {
-        РУ: "Добро пожаловать",
-        UZ: "Xush kelibsiz",
-      },
-      address: {
-        РУ: "Ташкент, Юнусабадский район",
-        UZ: "Toshkent, Yunusobod tumani",
-      },
-      "main-nav-home": {
-        РУ: "Главная",
-        UZ: "Bosh sahifa",
-      },
-      "main-nav-about": {
-        РУ: "О школе",
-        UZ: "Maktab haqida",
-      },
-      "main-nav-programs": {
-        РУ: "Программы",
-        UZ: "Dasturlar",
-      },
-      "main-nav-contacts": {
-        РУ: "Контакты",
-        UZ: "Aloqa",
-      },
-    };
-  
-    langButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        // Удаляем активный класс у всех кнопок
-        langButtons.forEach((btn) => btn.classList.remove("active"));
-  
-        // Добавляем активный класс текущей кнопке
-        this.classList.add("active");
-  
-        // Получаем выбранный язык
-        const lang = this.textContent;
-  
-        // Применяем перевод ко всем элементам
-        document.title = elementsToTranslate["title"][lang];
-  
-        document.querySelectorAll("[data-translate]").forEach((element) => {
-          const key = element.getAttribute("data-translate");
-          if (elementsToTranslate[key]) {
-            element.textContent = elementsToTranslate[key][lang];
-          }
-        });
-  
-        // Сохраняем выбор языка в localStorage
-        localStorage.setItem("selectedLang", lang);
-      });
+  // language.js - полностью заменить содержимое файла
+document.addEventListener("DOMContentLoaded", function () {
+  // 1. Словарь всех переводов
+  const translations = {
+    "school-name": {
+      ru: "School Academy",
+      uz: "School Akademiyasi",
+    },
+    address: {
+      ru: "Ташкент, Юнусабадский район",
+      uz: "Toshkent, Yunusobod tumani",
+    },
+    "nav-home": {
+      ru: "Главная",
+      uz: "Bosh sahifa",
+    },
+    "nav-about": {
+      ru: "О школе",
+      uz: "Maktab haqida",
+    },
+    // Добавьте другие фразы по аналогии
+  };
+
+  // 2. Безопасная функция получения перевода
+  function getTranslation(key, lang) {
+    if (!translations || !translations[key]) return key;
+    return translations[key][lang] || translations[key]["ru"] || key;
+  }
+
+  // 3. Применение языка ко всем элементам
+  function applyLanguage(lang) {
+    // Текстовые элементы
+    document.querySelectorAll("[data-translate]").forEach((element) => {
+      const key = element.getAttribute("data-translate");
+      element.textContent = getTranslation(key, lang);
     });
-  
-    // Восстанавливаем выбранный язык при загрузке страницы
-    const savedLang = localStorage.getItem("selectedLang") || "РУ";
-    document.querySelector(`.lang-btn:contains('${savedLang}')`).click();
-  });
-  // ====222222222222=======
+
+    // Плейсхолдеры инпутов
+    document.querySelectorAll("[data-translate-placeholder]").forEach((input) => {
+      const key = input.getAttribute("data-translate-placeholder");
+      input.placeholder = getTranslation(key, lang);
+    });
+
+    // Атрибут lang у html
+    document.documentElement.lang = lang;
+  }
+
+  // 4. Инициализация языка
+  function initLanguage() {
+    const savedLang = localStorage.getItem("selectedLang");
+    const browserLang = navigator.language.slice(0, 2);
+    const defaultLang = ["ru", "uz"].includes(browserLang) ? browserLang : "ru";
+    const lang = savedLang || defaultLang;
+
+    applyLanguage(lang);
+
+    // Обновляем кнопки переключателя
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      const btnLang = btn.getAttribute("data-lang");
+      btn.classList.toggle("active", btnLang === lang);
+      btn.setAttribute("aria-pressed", btnLang === lang ? "true" : "false");
+    });
+
+    // Анимация слайдера
+    const slider = document.querySelector(".lang-slider");
+    if (slider) {
+      slider.style.transform = lang === "uz" ? "translateX(100%)" : "translateX(0)";
+    }
+  }
+
+  // 5. Обработчики кнопок переключения
   document.querySelectorAll(".lang-btn").forEach((btn) => {
+    console.log(btn);
+
     btn.addEventListener("click", function () {
-      // Удаляем active у всех кнопок
-      document.querySelectorAll(".lang-btn").forEach((b) => b.classList.remove("active"));
-  
-      // Добавляем active текущей кнопке
-      this.classList.add("active");
-  
-      // Обновляем позицию слайдера
       const lang = this.getAttribute("data-lang");
-      document.querySelector(".language-switcher").setAttribute("data-active-lang", lang);
-  
-      // Здесь можно добавить логику смены языка
-      console.log("Выбран язык:", lang);
+      localStorage.setItem("selectedLang", lang);
+      applyLanguage(lang);
+
+      document.querySelectorAll(".lang-btn").forEach((b) => {
+        b.classList.toggle("active", b === this);
+        b.setAttribute("aria-pressed", b === this ? "true" : "false");
+      });
+
+      const slider = document.querySelector(".lang-slider");
+      if (slider) {
+        slider.style.transform = lang === "uz" ? "translateX(100%)" : "translateX(0)";
+      }
     });
   });
 
+  // Запускаем инициализацию
+  initLanguage();
+});
+
+<!-- form-validation.js -->
+
+class FormValidator {
+    constructor(formId) {
+      this.form = document.getElementById(formId);
+      this.init();
+    }
+  
+    init() {
+      this.setMinDate();
+      this.addValidation();
+      this.initPhoneMask();
+    }
+  
+    setMinDate() {
+      const dateInput = this.form.querySelector('input[type="date"]');
+      if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+      }
+    }
+  
+    initPhoneMask() {
+      const phoneInput = this.form.querySelector('input[type="tel"]');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+          const x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+          e.target.value = !x[2] ? x[1] : `+${x[1]} (${x[2]}) ${x[3]}-${x[4]}-${x[5]}`;
+        });
+      }
+    }
+  
+    addValidation() {
+      this.form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        if (this.validateForm()) {
+          await this.submitForm();
+        }
+      });
+    }
+  
+    validateForm() {
+      let isValid = true;
+      const requiredFields = this.form.querySelectorAll('[required]');
+  
+      requiredFields.forEach(field => {
+        field.classList.remove('error');
+        
+        if (!field.value.trim()) {
+          field.classList.add('error');
+          this.showError(field, 'Это поле обязательно');
+          isValid = false;
+        }
+  
+        if (field.type === 'email' && !this.validateEmail(field.value)) {
+          field.classList.add('error');
+          this.showError(field, 'Введите корректный email');
+          isValid = false;
+        }
+      });
+  
+      return isValid;
+    }
+  
+    validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+  
+    showError(field, message) {
+      let errorElement = field.nextElementSibling;
+      
+      if (!errorElement || !errorElement.classList.contains('error-message')) {
+        errorElement = document.createElement('div');
+        errorElement.className = 'error-message';
+        field.parentNode.insertBefore(errorElement, field.nextSibling);
+      }
+      
+      errorElement.textContent = message;
+    }
+  
+    async submitForm() {
+      const formData = new FormData(this.form);
+      const submitBtn = this.form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+  
+      try {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+  
+        const response = await fetch(this.form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        });
+  
+        const data = await response.json();
+  
+        if (data.success) {
+          this.showSuccessMessage();
+          this.form.reset();
+        } else {
+          this.showServerError(data.message);
+        }
+      } catch (error) {
+        console.error('Ошибка:', error);
+        this.showServerError('Ошибка соединения');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    }
+  
+    showSuccessMessage() {
+      const successMsg = document.createElement('div');
+      successMsg.className = 'success-message';
+      successMsg.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        <span data-translate="form-success">Спасибо! Мы свяжемся с вами в ближайшее время.</span>
+      `;
+      
+      this.form.parentNode.insertBefore(successMsg, this.form.nextSibling);
+      
+      setTimeout(() => {
+        successMsg.classList.add('fade-out');
+        setTimeout(() => successMsg.remove(), 500);
+      }, 5000);
+    }
+  
+    showServerError(message) {
+      alert(`Ошибка: ${message}`);
+    }
+  }
+  
+  // Инициализация для всех форм
+  document.addEventListener('DOMContentLoaded', () => {
+    new FormValidator('schoolTourForm');
+    // Добавьте другие формы по необходимости
+  });
+
+  <!-- analytics.js -->
+  // analytics.js
+  document.addEventListener('DOMContentLoaded', function () {
+      // Google Analytics
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX'); // Замените на ваш ID
+  
+      // Yandex Metrika
+      (function (m, e, t, r, i, k, a) {
+          m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+          m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+      })
+          (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+      ym(XXXXXX, "init", { // Замените XXXXXX на ваш ID
+          clickmap: true,
+          trackLinks: true,
+          accurateTrackBounce: true
+      });
+  
+      // Отслеживание кликов по телефону
+      document.querySelectorAll('.bouncing-phone-number').forEach(phone => {
+          phone.addEventListener('click', () => {
+              gtag('event', 'phone_click', {
+                  'event_category': 'engagement',
+                  'event_label': 'Phone Call'
+              });
+              ym(XXXXXX, 'reachGoal', 'PHONE_CLICK');
+          });
+      });
+  
+      // Отслеживание отправки форм
+      document.querySelectorAll('form').forEach(form => {
+          form.addEventListener('submit', () => {
+              const formName = form.id || 'unknown_form';
+              gtag('event', 'form_submit', {
+                  'event_category': 'lead',
+                  'event_label': formName
+              });
+              ym(XXXXXX, 'reachGoal', 'FORM_SUBMIT');
+          });
+      });
+  });
+
   <!-- style.css -->
- 
+
   /* ===== Глобальные стили ===== */
 :root {
   /* --primary: #3498db;
@@ -1703,6 +2223,127 @@ img {
 .address i {
   color: var(--primary);
 }
+
+/* Новые стили для доступности */
+[aria-expanded="true"] .menu-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+[aria-expanded="true"] .menu-line:nth-child(2) {
+  opacity: 0;
+}
+
+[aria-expanded="true"] .menu-line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* Оптимизированные анимации */
+.wow {
+  will-change: transform, opacity;
+}
+
+/* Ленивая загрузка */
+img[loading="lazy"] {
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/*для формы обратной связи */
+/* Стили для формы записи */
+.appointment-form {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--white);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+}
+
+.error {
+  border-color: #e74c3c !important;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.success-message {
+  background: #2ecc71;
+  color: white;
+  padding: 15px;
+  border-radius: var(--radius);
+  margin-top: 20px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.success-message i {
+  margin-right: 10px;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Адаптивность формы */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+
 <!-- responsive.css -->
 
 @media (max-width: 768px) {
@@ -1741,558 +2382,9 @@ img {
     }
   }
 
-  <!-- phone.css -->
-  /* .phone-container {
-    position: relative;
-    display: inline-block;
-    margin: 10px;
-    overflow: hidden;
-    border-radius: 50px;
-  }
-  
-  .phone-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    color: white;
-    border-radius: 50px;
-    z-index: 2;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .phone-icon {
-    font-size: 18px;
-    margin-right: 12px;
-    transition: transform 0.3s ease;
-  }
-  
-  
-  .phone-link {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .phone-number {
-    font-weight: 600;
-    font-size: 16px;
-  }
-  
-  .phone-call-text {
-    font-size: 12px;
-    opacity: 0.8;
-    margin-top: 2px;
-    transition: all 0.3s ease;
-  }
-  
-  
-  .phone-ripple {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50px;
-    z-index: 1;
-    transform: scale(0);
-    opacity: 0;
-  }
-  
-  
-  .phone-container:hover .phone-wrapper {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  }
-  
-  .phone-container:hover .phone-icon {
-    transform: rotate(15deg);
-  }
-  
-  .phone-container:hover .phone-call-text {
-    opacity: 1;
-    transform: translateX(5px);
-  }
-  
-  
-  .phone-link:active + .phone-ripple {
-    animation: ripple 0.6s ease-out;
-  }
-  
-  @keyframes ripple {
-    0% {
-      transform: scale(0);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1.5);
-      opacity: 0;
-    }
-  }
-  
-  
-  @media (prefers-color-scheme: dark) {
-    .phone-wrapper {
-      background: linear-gradient(135deg, #4b6cb7, #182848);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-  }
-  */
-  /* ==========2222222222222222============ */
-  /* .modern-phone {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 16px;
-    background-color: rgba(30, 136, 229, 0.1);
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(30, 136, 229, 0.2);
-  }
-  
-  .modern-phone:hover {
-    background-color: rgba(30, 136, 229, 0.15);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.1);
-  }
-  
-  .phone-icon-circle {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1e88e5, #1976d2);
-    color: white;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-  }
-  
-  .modern-phone:hover .phone-icon-circle {
-    transform: scale(1.1) rotate(10deg);
-  }
-  
-  .phone-content {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-  }
-  
-  .phone-number {
-    font-weight: 600;
-    color: #2c3e50;
-    font-size: 16px;
-    line-height: 1.2;
-  }
-  
-  .phone-label {
-    font-size: 12px;
-    color: #7f8c8d;
-    margin-top: 2px;
-    transition: color 0.3s ease;
-  }
-  
-  .modern-phone:hover .phone-label {
-    color: #1e88e5;
-  }
-  
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  
-  .phone-icon-circle i {
-    animation: pulse 2s infinite;
-  }
-  
-  .modern-phone:hover .phone-icon-circle i {
-    animation: none;
-  } */
-  /* =====333333333333====== */
-  /* Используем ваши точные переменные */
-  /* .pulsing-phone-element {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    background-color: var(--white);
-    border-radius: 50px;
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.15);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-    border: 1px solid rgba(30, 136, 229, 0.2);
-  }
-  
-  .pulsing-phone-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: var(--white);
-    border-radius: 50%;
-    position: relative;
-  }
-  
-  .pulsing-phone-icon::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: rgba(30, 136, 229, 0.3);
-    animation: pulse-ring 2s infinite;
-    z-index: 0;
-  }
-  
-  .pulsing-phone-icon i {
-    position: relative;
-    z-index: 1;
-    animation: pulse-icon 2s infinite;
-  }
-  
-  .pulsing-phone-link {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-  }
-  
-  .pulsing-phone-number {
-    font-weight: 700;
-    color: var(--dark);
-    font-size: 17px;
-    line-height: 1.3;
-    animation: pulse-text 2s infinite;
-    position: relative;
-  }
-  
-  .phone-call-action {
-    font-size: 12px;
-    color: var(--gray);
-    margin-top: 3px;
-    transition: all 0.3s ease;
-  }
-  
-  @keyframes pulse-ring {
-    0% {
-      transform: scale(0.8);
-      opacity: 1;
-    }
-    70%,
-    100% {
-      transform: scale(1.3);
-      opacity: 0;
-    }
-  }
-  
-  @keyframes pulse-icon {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-  }
-  
-  @keyframes pulse-text {
-    0%,
-    100% {
-      color: var(--dark);
-      text-shadow: 0 0 0 rgba(30, 136, 229, 0);
-    }
-    50% {
-      color: var(--primary);
-      text-shadow: 0 0 8px rgba(30, 136, 229, 0.3);
-    }
-  }
-  
-  .pulsing-phone-element:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.25);
-  }
-  
-  .pulsing-phone-element:hover .pulsing-phone-icon {
-    transform: rotate(15deg);
-  }
-  
-  .pulsing-phone-element:hover .pulsing-phone-icon::after,
-  .pulsing-phone-element:hover .pulsing-phone-icon i,
-  .pulsing-phone-element:hover .pulsing-phone-number {
-    animation: none;
-  }
-  
-  .pulsing-phone-element:hover .phone-call-action {
-    color: var(--primary);
-    transform: translateX(5px);
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .pulsing-phone-element {
-      background-color: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-  
-    .pulsing-phone-number {
-      color: var(--light);
-    }
-  
-    @keyframes pulse-text {
-      0%,
-      100% {
-        color: var(--light);
-        text-shadow: 0 0 0 rgba(30, 136, 229, 0);
-      }
-      50% {
-        color: var(--secondary);
-        text-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
-      }
-    }
-  } */
-  /* =========44444444========== */
-  /* Ваши переменные */
-  
-  /* .animated-phone-element {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    background-color: var(--white);
-    border-radius: 50px;
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.15);
-    transition: all 0.8s ease;
-    border: 1px solid rgba(30, 136, 229, 0.2);
-  }
-  
-  .phone-icon-pulse {
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: var(--white);
-    border-radius: 50%;
-    position: relative;
-    animation: pulse-icon 2.5s infinite ease-in-out;
-  }
-  
-  .phone-link-motion {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-  }
-  
-  .phone-number-bounce {
-    font-weight: 700;
-    color: var(--dark);
-    font-size: 16px;
-    line-height: 1.3;
-    animation: bounce-text 2.8s infinite cubic-bezier(0.5, 0, 0.5, 1);
-    position: relative;
-    transform-origin: left center;
-  }
-  
-  .phone-call-hint {
-    font-size: 12px;
-    color: var(--gray);
-    margin-top: 3px;
-    transition: all 0.3s ease;
-  }
-  
-  
-  @keyframes pulse-icon {
-    0%,
-    100% {
-      transform: scale(1);
-      box-shadow: 0 0 0 0 rgba(30, 136, 229, 0.4);
-    }
-    50% {
-      transform: scale(1.1);
-      box-shadow: 0 0 0 8px rgba(30, 136, 229, 0);
-    }
-  }
-  
-  
-  @keyframes bounce-text {
-    0%,
-    100% {
-      transform: translateY(0);
-      color: var(--dark);
-    }
-    25% {
-      transform: translateY(-3px);
-      color: var(--primary);
-    }
-    50% {
-      transform: translateY(0);
-    }
-    75% {
-      transform: translateY(-2px);
-    }
-  }
-  
-  
-  .animated-phone-element:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.25);
-  }
-  
-  .animated-phone-element:hover .phone-icon-pulse,
-  .animated-phone-element:hover .phone-number-bounce {
-    animation: none;
-  }
-  
-  .animated-phone-element:hover .phone-icon-pulse {
-    transform: scale(1.1) rotate(15deg);
-  }
-  
-  .animated-phone-element:hover .phone-number-bounce {
-    transform: translateY(-3px);
-    color: var(--primary);
-  }
-  
-  .animated-phone-element:hover .phone-call-hint {
-    color: var(--primary);
-    transform: translateX(5px);
-  }
-  
-  
-  @media (prefers-color-scheme: dark) {
-    .animated-phone-element {
-      background-color: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-  
-    .phone-number-bounce {
-      color: var(--light);
-    }
-  
-    @keyframes bounce-text {
-      0%,
-      100% {
-        transform: translateY(0);
-        color: var(--light);
-      }
-      25% {
-        transform: translateY(-3px);
-        color: var(--secondary);
-      }
-      50% {
-        transform: translateY(0);
-      }
-      75% {
-        transform: translateY(-2px);
-      }
-    }
-  } */
-  /* =======555555555555555========== */
-  /* Ваши переменные */
-  /* :root {
-      --primary: #1E88E5;
-      --primary-dark: #2980b9;
-      --dark: #2c3e50;
-      --white: #ffffff;
-    } */
-  
-  .minimal-phone {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 18px;
-    background-color: var(--white);
-    border-radius: 50px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-  }
-  
-  .phone-pulse-icon {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--primary);
-    color: var(--white);
-    border-radius: 50%;
-    animation: pulse 2s infinite ease-in-out;
-  }
-  
-  .bouncing-phone-number {
-    font-weight: 600;
-    color: var(--dark) !important;
-    font-size: 16px;
-    text-decoration: none;
-    animation: bounce 1.5s infinite ease-in-out;
-    display: inline-block;
-  }
-  
-  /* Анимация пульсации иконки */
-  @keyframes pulse {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-  }
-  
-  /* Анимация движения номера */
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-3px);
-    }
-  }
-  
-  /* Эффекты при наведении */
-  .minimal-phone:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-  }
-  
-  .minimal-phone:hover .phone-pulse-icon,
-  .minimal-phone:hover .bouncing-phone-number {
-    animation: none;
-  }
-  
-  .minimal-phone:hover .phone-pulse-icon {
-    background: var(--primary-dark);
-    transform: scale(1.1) rotate(15deg);
-  }
-  
-  .minimal-phone:hover .bouncing-phone-number {
-    color: var(--primary);
-    transform: translateY(-3px);
-  }
-  
-  /* Темная тема */
-  @media (prefers-color-scheme: dark) {
-    .minimal-phone {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-  
-    .bouncing-phone-number {
-      color: var(--white);
-    }
-  }
-  <!--lang.css-  -->
-  .language-switcher {
+  <!-- lang.css -->
+
+  /*.language-switcher {
     position: relative;
     display: inline-flex;
     background: rgba(30, 136, 229, 0.1);
@@ -2320,6 +2412,38 @@ img {
   .lang-btn.active {
     color: var(--white);
   }
+  */
+  
+  /* lang.css - добавить эти стили */
+  .language-switcher {
+    position: relative;
+    display: inline-flex;
+    background: rgba(30, 136, 229, 0.1);
+    border-radius: 50px;
+    padding: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+  }
+  
+  .lang-btn {
+    position: relative;
+    width: 48px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 2;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    outline: none;
+  }
+  
+  .lang-btn.active {
+    color: white;
+  }
   
   .lang-slider {
     position: absolute;
@@ -2330,7 +2454,7 @@ img {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     border-radius: 50px;
     z-index: 1;
-    transition: var(--transition);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
     box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3);
   }
   
@@ -2351,13 +2475,10 @@ img {
     100% {
       transform: scale(1);
     }
+  
     50% {
       transform: scale(0.95);
     }
-  }
-  
-  .lang-btn.active {
-    animation: pulse-active 3s infinite ease-in-out;
   }
   
   .language-switcher:hover .lang-btn.active {
@@ -2371,134 +2492,203 @@ img {
     }
   
     .lang-btn {
-      color: var(--gray);
+      color: var(--primary);
     }
   
     .lang-btn:not(.active):hover {
       color: var(--primary-dark);
     }
   }
+  
+  /*+++++++++*/
+  .language-switcher {
+    position: relative;
+    display: inline-flex;
+    background: rgba(30, 136, 229, 0.1);
+    border-radius: 50px;
+    padding: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+  }
+  
+  .lang-btn.active {
+    color: white;
+  }
+
+  <!-- header.css -->
+  /* Стиль для активной ссылки */
+  nav ul li a.active {
+    position: relative;
+    color: #007bff; /* Цвет текста активной ссылки */
+  }
+  
+  nav ul li a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff;
+    transition: all 0.3s ease;
+  }
+  
+  /* Убедитесь, что обычные ссылки не имеют подчеркивания */
+  nav ul li a {
+    text-decoration: none;
+  }
+  /* Убедитесь, что эти стили есть */
+  nav ul li a {
+    position: relative;
+    text-decoration: none;
+  }
+  
+  nav ul li a.active {
+    color: #007bff; /* Цвет активной ссылки */
+  }
+  
+  nav ul li a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff;
+    transition: all 0.3s ease;
+  }
+  
+  /* Для мобильного меню */
+  .main-nav.show-mobile {
+    display: block;
+  }
+  
+  /* Для мобильного меню */
+  .main-nav.show-mobile {
+    display: block;
+  }
+
   <!-- animate.css -->
+
   /* ===== Анимации ===== */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  
-  @keyframes fadeInRight {
-    from {
-      opacity: 0;
-      transform: translateX(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  @keyframes zoomIn {
-    from {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
   }
-  
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  @keyframes scrollDown {
-    0% {
-      top: 8px;
-      opacity: 1;
-    }
-    50% {
-      top: 15px;
-      opacity: 0.5;
-    }
-    100% {
-      top: 8px;
-      opacity: 1;
-    }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
   }
-  
-  /* Классы анимаций */
-  .wow {
-    visibility: hidden;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  .fadeIn {
-    animation-name: fadeIn;
-    animation-duration: 0.8s;
-    animation-fill-mode: both;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
   }
-  
-  .fadeInUp {
-    animation-name: fadeInUp;
-    animation-duration: 0.8s;
-    animation-fill-mode: both;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  .fadeInLeft {
-    animation-name: fadeInLeft;
-    animation-duration: 0.8s;
-    animation-fill-mode: both;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  .fadeInRight {
-    animation-name: fadeInRight;
-    animation-duration: 0.8s;
-    animation-fill-mode: both;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .zoomIn {
-    animation-name: zoomIn;
-    animation-duration: 0.8s;
-    animation-fill-mode: both;
+}
+
+@keyframes scrollDown {
+  0% {
+    top: 8px;
+    opacity: 1;
   }
-  
-  .slideDown {
-    animation-name: slideDown;
-    animation-duration: 0.5s;
-    animation-fill-mode: both;
+  50% {
+    top: 15px;
+    opacity: 0.5;
   }
-  
+  100% {
+    top: 8px;
+    opacity: 1;
+  }
+}
+
+/* Классы анимаций */
+.wow {
+  visibility: hidden;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.fadeInUp {
+  animation-name: fadeInUp;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.fadeInLeft {
+  animation-name: fadeInLeft;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.fadeInRight {
+  animation-name: fadeInRight;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.zoomIn {
+  animation-name: zoomIn;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.slideDown {
+  animation-name: slideDown;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}

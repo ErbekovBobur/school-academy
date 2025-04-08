@@ -3,40 +3,40 @@ document.addEventListener("DOMContentLoaded", function () {
   // 1. Словарь всех переводов
   const translations = {
     "school-name": {
-      "ru": "School Academy",
-      "uz": "School Akademiyasi"
+      ru: "School Academy",
+      uz: "School Akademiyasi",
     },
-    "address": {
-      "ru": "Ташкент, Юнусабадский район",
-      "uz": "Toshkent, Yunusobod tumani"
+    address: {
+      ru: "Ташкент, Юнусабадский район",
+      uz: "Toshkent, Yunusobod tumani",
     },
     "nav-home": {
-      "ru": "Главная",
-      "uz": "Bosh sahifa"
+      ru: "Главная",
+      uz: "Bosh sahifa",
     },
     "nav-about": {
-      "ru": "О школе",
-      "uz": "Maktab haqida"
-    }
+      ru: "О школе",
+      uz: "Maktab haqida",
+    },
     // Добавьте другие фразы по аналогии
   };
 
   // 2. Безопасная функция получения перевода
   function getTranslation(key, lang) {
     if (!translations || !translations[key]) return key;
-    return translations[key][lang] || translations[key]['ru'] || key;
+    return translations[key][lang] || translations[key]["ru"] || key;
   }
 
   // 3. Применение языка ко всем элементам
   function applyLanguage(lang) {
     // Текстовые элементы
-    document.querySelectorAll("[data-translate]").forEach(element => {
+    document.querySelectorAll("[data-translate]").forEach((element) => {
       const key = element.getAttribute("data-translate");
       element.textContent = getTranslation(key, lang);
     });
 
     // Плейсхолдеры инпутов
-    document.querySelectorAll("[data-translate-placeholder]").forEach(input => {
+    document.querySelectorAll("[data-translate-placeholder]").forEach((input) => {
       const key = input.getAttribute("data-translate-placeholder");
       input.placeholder = getTranslation(key, lang);
     });
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     applyLanguage(lang);
 
     // Обновляем кнопки переключателя
-    document.querySelectorAll(".lang-btn").forEach(btn => {
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
       const btnLang = btn.getAttribute("data-lang");
       btn.classList.toggle("active", btnLang === lang);
       btn.setAttribute("aria-pressed", btnLang === lang ? "true" : "false");
@@ -69,13 +69,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 5. Обработчики кнопок переключения
-  document.querySelectorAll(".lang-btn").forEach(btn => {
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    console.log(btn);
+
     btn.addEventListener("click", function () {
       const lang = this.getAttribute("data-lang");
       localStorage.setItem("selectedLang", lang);
       applyLanguage(lang);
 
-      document.querySelectorAll(".lang-btn").forEach(b => {
+      document.querySelectorAll(".lang-btn").forEach((b) => {
         b.classList.toggle("active", b === this);
         b.setAttribute("aria-pressed", b === this ? "true" : "false");
       });
