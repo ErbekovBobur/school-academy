@@ -1,21 +1,12 @@
 /* ===== Глобальные стили ===== */
 :root {
-  /* --primary: #3498db;
+  --primary: #1e88e5;
   --primary-dark: #2980b9;
   --secondary: #2ecc71;
   --dark: #2c3e50;
   --light: #ecf0f1;
   --white: #ffffff;
-  --gray: #95a5a6; */
-
-  --primary: #1e88e5; /* Основной синий */
-  --primary-dark: #2980b9; /* Темный синий */
-  --secondary: #2ecc71; /* Зеленый */
-  --dark: #2c3e50; /* Темный текст */
-  --light: #ecf0f1; /* Светлый фон */
-  --white: #ffffff;
-  --gray: #95a5a6; /* Серый текст */
-
+  --gray: #95a5a6;
   --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   --radius: 8px;
@@ -103,7 +94,6 @@ img {
   color: var(--primary);
 }
 
-/* Основная навигация */
 .main-nav ul {
   display: flex;
   list-style: none;
@@ -136,9 +126,7 @@ img {
 .nav-link.active::after {
   width: 100%;
 }
-/* Phone number */
 
-/* Выпадающее меню */
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -154,14 +142,11 @@ img {
   transition: var(--transition);
   z-index: 100;
 }
-/* .dropdown:hover .dropdown-menu {
+
+.dropdown:hover .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-} */
-/* Проблема в строке 128 */
-.dropdown:hover .dropdown-menu {
-  display: block; /* Лучше использовать opacity/visibility для плавности */
 }
 
 .dropdown-menu li {
@@ -183,7 +168,6 @@ img {
   transform: rotate(180deg);
 }
 
-/* Кнопка мобильного меню */
 .mobile-menu-btn {
   display: none;
   background: none;
@@ -207,14 +191,83 @@ img {
 .menu-line:nth-child(1) {
   top: 0;
 }
-
 .menu-line:nth-child(2) {
   top: 50%;
   transform: translateY(-50%);
 }
-
 .menu-line:nth-child(3) {
   bottom: 0;
+}
+
+[aria-expanded="true"] .menu-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+[aria-expanded="true"] .menu-line:nth-child(2) {
+  opacity: 0;
+}
+
+[aria-expanded="true"] .menu-line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+@media (max-width: 992px) {
+  .header-container {
+    padding: 15px 20px;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: var(--white);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    padding: 80px 30px 30px;
+    transition: var(--transition);
+    z-index: 1000;
+  }
+
+  .main-nav.active {
+    right: 0;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 10px;
+    margin-left: 15px;
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+/* Мини-оптимизации */
+.wow {
+  will-change: transform, opacity;
+}
+
+img[loading="lazy"] {
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
 }
 
 /* ===== Герой баннер ===== */
@@ -225,7 +278,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("../img/banner-tashkent.jpg.jpg") center/cover no-repeat;
+  background: url("../img/orig.jpg") center/cover no-repeat;
   margin-top: 80px;
 }
 
@@ -263,7 +316,6 @@ img {
   margin-bottom: 30px;
 }
 
-/* Кнопка CTA */
 .cta-button {
   display: inline-block;
   padding: 15px 35px;
@@ -285,7 +337,6 @@ img {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Скролл вниз */
 .scroll-down {
   position: absolute;
   bottom: 30px;
@@ -329,7 +380,6 @@ img {
   }
 }
 
-/* ===== Секции ===== */
 .section-header {
   text-align: center;
   margin-bottom: 60px;
@@ -363,7 +413,6 @@ img {
   font-size: 1.1rem;
 }
 
-/* Карточки особенностей */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -529,10 +578,6 @@ img {
     margin-top: 10px;
     margin-left: 15px;
     display: none;
-  }
-
-  .dropdown:hover .dropdown-menu {
-    display: block;
   }
 
   .mobile-menu-btn {

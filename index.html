@@ -5,36 +5,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>School Academy | Ташкент</title>
-  <!-- Вставить ПЕРВЫМИ внутри <head> перед другими CSS/JS -->
-<link rel="preload" href="css/style.css" as="style">
-<link rel="preload" href="js/main.js" as="script">
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- Для ключевых изображений -->
-<link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x">
+  <!-- 🚀 Preload важнейших ресурсов -->
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="preload" href="js/main.js" as="script">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossorigin="anonymous">
+  <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x">
+
+  <!-- 🖋️ Стили -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animate.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
   <link rel="stylesheet" href="./css/phone.css">
   <link rel="stylesheet" href="./css/lang.css">
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script src="js/analytics.js"></script>
-  <script src="js/language.js" defer></script>
-  
-  <!-- Yandex Metrika -->
-  <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- 🔤 Шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <!-- 🧭 Иконка и манифест -->
+  <link rel="shortcut icon" href="img/logo-uz.png" type="image/x-icon">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1e88e5">
 
+  <!-- 📊 Аналитика и логика -->
+  <!-- <script defer src="js/analytics.js"></script>
+  <script defer src="js/language.js"></script>
+  <script defer src="./js/ya.js"></script>-->
+  <!-- <script defer src="js/main.js"></script>  -->
+
+  <!-- WOW.js -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  
 </head>
+
 
 <body>
   <!-- Шапка -->
@@ -51,9 +55,9 @@
       <nav class="main-nav">
         <ul>
           <li><a data-translate="nav-home" href="index.html" class="active nav-link">Главная</a></li>
-          <li><a data-translate="nav-home" href="./admin/news_out.html" class="active nav-link">News out</a></li>
           <li class="dropdown">
-            <a data-translate="nav-about" href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
+            <a data-translate="nav-about" href="about.html" class="nav-link">О школе <i
+                class="fas fa-chevron-down dropdown-icon"></i></a>
             <ul class="dropdown-menu">
               <li><a href="about.html#history" class="nav-link">История</a></li>
               <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
@@ -89,9 +93,9 @@
         <!-- Заменить переключатель языка на этот код -->
         <div class="language-switcher">
           <button class="lang-btn active" data-lang="ru" aria-label="Русский язык">РУ</button>
-            <button class="lang-btn" data-lang="uz" aria-label="O'zbek tili">UZ</button>
-              <span class="lang-slider"></span>
-              </div>
+          <button class="lang-btn" data-lang="uz" aria-label="O'zbek tili">UZ</button>
+          <span class="lang-slider"></span>
+        </div>
         <!-- ===Phone===== -->
         <!-- <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div> -->
         <!-- ================+1111111111+================ -->
@@ -278,7 +282,8 @@
         <!-- <div class="footer-column"></div> -->
       </div>
       <!-- <div class="footer-column" style="position: relative"> -->
-      <div class="footer-map">
+     
+      <!-- <div class="footer-map">
         <a href="https://yandex.uz/maps/org/97045873646/?utm_medium=mapframe&utm_source=maps"
           style="color: #eee; font-size: 12px; position: absolute; top: 0px">Школьная академия</a><a
           href="https://yandex.uz/maps/10335/tashkent/category/private_school/184106252/?utm_medium=mapframe&utm_source=maps"
@@ -287,16 +292,21 @@
           src="https://yandex.uz/map-widget/v1/?ll=69.272024%2C41.370359&mode=poi&poi%5Bpoint%5D=69.271655%2C41.371280&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D97045873646&z=17.94"
           width="600" height="500" frameborder="1" allowfullscreen="true" style="position: relative">
         </iframe>
-      </div>
+      </div> -->
 
     </div>
     <div class="copyright">
       <p>© 2024 School Academy. Все права защищены.</p>
+      <!-- Yandex Metrika -->
+      <!-- <noscript>
+        <div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position:absolute; left:-9999px;" alt="" /></div>
+      </noscript> -->
+
     </div>
     </div>
   </footer>
   <script src="./js/ya.js"></script>
-  <script src="js/main.js"></script>
+  <script src="/js/main.js" defer></script>
   <script src="js/language.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
   <script>
@@ -306,6 +316,15 @@
       offset: 50,
       mobile: true,
     }).init();
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-22ZG2NQ22L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-22ZG2NQ22L');
   </script>
 </body>
 
