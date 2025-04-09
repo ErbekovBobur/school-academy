@@ -16,55 +16,35 @@
   </head>
   <body>
     <!-- Шапка (такая же как на главной) -->
-    <header class="sticky-header">
-      <div class="header-container">
-        <div class="logo-container">
-          <img src="img/logo-uz.png" alt="School Academy" class="logo" />
-          <div class="school-info">
-            <h1>School Academy</h1>
-            <p>Ташкент, Юнусабадский район</p>
-          </div>
-        </div>
+    <div id="header-placeholder"></div>
 
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html" class="nav-link">Главная</a></li>
-            <li class="dropdown">
-              <a href="about.html" class="nav-link">О школе <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="about.html#history" class="nav-link">История</a></li>
-                <li><a href="about.html#teachers" class="nav-link">Преподаватели</a></li>
-                <li><a href="about.html#gallery" class="nav-link">Галерея</a></li>
-                <li><a href="about.html#mission" class="nav-link">Миссия</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="program.html" class="nav-link">Программы <i class="fas fa-chevron-down dropdown-icon"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="program.html#kindergarten" class="nav-link">Детский сад</a></li>
-                <li><a href="program.html#elementary" class="nav-link">Начальная школа</a></li>
-                <li><a href="program.html#middle" class="nav-link">Средняя школа</a></li>
-              </ul>
-            </li>
-            <li><a href="contacts.html" class="active nav-link">Контакты</a></li>
-          </ul>
-        </nav>
+    <script>
+      fetch("partials/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+      document.querySelectorAll(".dropdown").forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+          const menu = item.querySelector(".dropdown-menu");
+          menu.style.display = "block";
+          menu.style.animation = "slideDown 0.3s ease-out forwards";
+        });
 
-        <div class="header-right">
-          <div class="lang-switcher">
-            <button class="lang-btn active">РУ</button>
-            <button class="lang-btn">UZ</button>
-          </div>
-          <div class="phone"><i class="fas fa-phone-alt"></i> +998 (71) 123-45-67</div>
-        </div>
+        item.addEventListener("mouseleave", () => {
+          const menu = item.querySelector(".dropdown-menu");
+          menu.style.animation = "";
+          setTimeout(() => {
+            menu.style.display = "none";
+          }, 300);
+        });
+      });
 
-        <button class="mobile-menu-btn">
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-        </button>
-      </div>
-    </header>
+      // Мобильное меню
+      document.querySelector(".mobile-menu-btn").addEventListener("click", () => {
+        document.querySelector(".main-nav").classList.toggle("show-mobile");
+      });
+    </script>
 
     <!-- Основной контент -->
     <main class="content-wrapper">
