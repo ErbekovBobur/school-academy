@@ -1,3 +1,5 @@
+console.log("main.js is start");
+
 document.addEventListener("DOMContentLoaded", function () {
   // Элементы
   const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
