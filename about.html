@@ -24,8 +24,10 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="./css/phone.css" />
-    <link rel="stylesheet" href="./css/lang.css" />
+    <link rel="stylesheet" href="css/phone.css" />
+    <link rel="stylesheet" href="css/lang.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
 
     <!-- 🔤 Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,7 +35,7 @@
 
     <!-- 🧭 Иконка и манифест -->
     <link rel="shortcut icon" href="img/logo-uz.png" type="image/x-icon" />
-    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="manifest" href="manifest.webmanifest" />
     <meta name="theme-color" content="#1e88e5" />
 
     <!-- 📊 Аналитика и логика -->
@@ -230,7 +232,7 @@
       </section>
 
       <!-- Преподаватели -->
-      <section id="teachers" class="section-padding bg-light">
+      <!-- <section id="teachers" class="section-padding bg-light">
         <div class="container">
           <div class="section-header wow fadeIn">
             <h2>Наши преподаватели</h2>
@@ -266,10 +268,68 @@
             </div>
           </div>
         </div>
+      </section> -->
+      <section id="teachers" class="section-padding bg-light">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Наши преподаватели</h2>
+            <div class="divider"></div>
+            <p>Профессионалы с большим опытом</p>
+          </div>
+
+          <!-- Фильтрация преподавателей (по предмету) -->
+          <div class="teacher-filter">
+            <button class="filter-btn active" data-filter="all">Все преподаватели</button>
+            <button class="filter-btn" data-filter="math">Математика</button>
+            <button class="filter-btn" data-filter="physics">Физика</button>
+            <button class="filter-btn" data-filter="robotics">Робототехника</button>
+          </div>
+
+          <div class="teachers-grid">
+            <div class="teacher-card wow fadeIn" data-wow-delay="0.2s" data-category="math">
+              <div
+                class="teacher-img"
+                style="background-image: url('img/teachers/teacher1.jpg')"
+                alt="Преподаватель Дилфуза Исматова"
+              ></div>
+              <div class="teacher-info">
+                <h3>Исматова Дилфуза</h3>
+                <p class="subject">Математика</p>
+                <p class="experience">Опыт: 15 лет</p>
+                <p class="education">Образование: МГУ, магистр</p>
+                <div class="teacher-social">
+                  <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                  <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="teacher-card wow fadeIn" data-wow-delay="0.4s" data-category="physics">
+              <div
+                class="teacher-img"
+                style="background-image: url('img/teachers/teacher2.jpg')"
+                alt="Преподаватель Рустам Каримов"
+              ></div>
+              <div class="teacher-info">
+                <h3>Каримов Рустам</h3>
+                <p class="subject">Физика и робототехника</p>
+                <p class="experience">Опыт: 10 лет</p>
+                <p class="education">Образование: Узбекистанский университет, бакалавр</p>
+                <div class="teacher-social">
+                  <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                  <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Добавьте других преподавателей по аналогии -->
+          </div>
+        </div>
       </section>
 
       <!-- Галерея -->
-      <section id="gallery" class="section-padding">
+      <!-- <section id="gallery" class="section-padding">
+        
         <div class="container">
           <div class="section-header wow fadeIn">
             <h2>Галерея</h2>
@@ -289,6 +349,71 @@
               <div class="gallery-overlay">
                 <h3>Учебные классы</h3>
               </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+      <!-- <section id="gallery" class="section-padding bg-light">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Галерея</h2>
+            <div class="divider"></div>
+            <p>Погрузитесь в мир наших проектов</p>
+          </div>
+
+          
+          <div class="gallery-filter">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="design">Дизайн</button>
+            <button class="filter-btn" data-filter="projects">Проекты</button>
+            <button class="filter-btn" data-filter="events">Мероприятия</button>
+          </div>
+
+          
+          <div class="gallery-grid">
+            <div class="gallery-item wow fadeIn" data-wow-delay="0.2s" data-category="design">
+              <img src="img/gallery/image1.jpg" alt="Проект 1" class="gallery-image" />
+            </div>
+            <div class="gallery-item wow fadeIn" data-wow-delay="0.4s" data-category="projects">
+              <img src="img/gallery/image2.jpg" alt="Проект 2" class="gallery-image" />
+            </div>
+            <div class="gallery-item wow fadeIn" data-wow-delay="0.6s" data-category="events">
+              <img src="img/gallery/image3.jpg" alt="Событие 1" class="gallery-image" />
+            </div>
+            
+          </div>
+
+          
+          <div id="lightbox" class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+          </div>
+        </div>
+      </section> -->
+      <section id="gallery" class="section-padding bg-light">
+        <div class="container">
+          <div class="section-header wow fadeIn">
+            <h2>Галерея</h2>
+            <div class="divider"></div>
+            <p>Погрузитесь в мир наших проектов</p>
+          </div>
+
+          <!-- Карусель -->
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="img/gallery/image1.jpg" alt="Проект 1" />
+              </div>
+              <div class="swiper-slide">
+                <img src="img/gallery/image2.jpg" alt="Проект 2" />
+              </div>
+              <div class="swiper-slide">
+                <img src="img/gallery/image3.jpg" alt="Проект 3" />
+              </div>
+              <div class="swiper-slide">
+                <img src="img/gallery/image4.jpg" alt="Проект 4" />
+              </div>
+              <!-- Добавьте больше слайдов по необходимости -->
             </div>
           </div>
         </div>
@@ -337,9 +462,11 @@
           document.getElementById("footer-placeholder").innerHTML = data;
         });
     </script>
-    <script src="./js/ya.js"></script>
-    <script src="/js/main.js" defer></script>
+    <script src="js/ya.js"></script>
+    <script src="js/main.js" defer></script>
     <script src="js/language.js" defer></script>
+    <script src="js/about.js"></script>
+    <script src="./js/gallery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script>
       new WOW({
