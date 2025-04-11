@@ -68,6 +68,12 @@ btnNext.addEventListener("click", () => {
   pauseAutoScroll();
 });
 
+// Привязка обработчика события клика к каждому изображению
+const images = document.querySelectorAll(".gallery-card img");
+images.forEach((img) => {
+  img.addEventListener("click", () => openModal(img));
+});
+
 // Пользовательская прокрутка мышью/тачем
 galleryRow.addEventListener("mousedown", pauseAutoScroll);
 galleryRow.addEventListener("touchstart", pauseAutoScroll);
