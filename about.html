@@ -14,6 +14,8 @@
       as="style"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
     <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x" />
 
     <!-- 🖋️ Стили -->
@@ -417,6 +419,11 @@
             </div>
           </div>
         </div>
+        <div id="lightbox" class="lightbox">
+          <span class="lightbox-close">&times;</span>
+          <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+        </div>
+      </div>
       </section>
 
       <!-- Миссия -->
@@ -466,7 +473,10 @@
     <script src="js/main.js" defer></script>
     <script src="js/language.js" defer></script>
     <script src="js/about.js"></script>
-    <script src="./js/gallery.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="js/gallery.js"></script>
+    ;
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script>
       new WOW({

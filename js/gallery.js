@@ -1,6 +1,8 @@
 // <!-- Подключаем библиотеку Swiper -->
 // <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>;
+{
+  /* <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>; */
+}
 
 // Инициализация Swiper с автопрокруткой
 const swiper = new Swiper(".swiper-container", {
@@ -21,7 +23,27 @@ const swiper = new Swiper(".swiper-container", {
   },
 });
 {
-  /* 
+  // Галарея
+  // // Модальное окно
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".lightbox-close");
+  document.querySelectorAll(".swiper-slide").forEach((item) => {
+    item.addEventListener("click", () => {
+      const imgSrc = item.querySelector(".swiper-slide > img").src;
+      lightboxImg.src = imgSrc;
+      lightbox.style.display = "flex";
+    });
+  });
+  closeBtn.addEventListener("click", () => {
+    lightbox.style.display = "none";
+  });
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
+    }
+  });
+  /*
 Дальнейшие улучшения:
 Добавить кнопки управления: Вы можете добавить кнопки для ручной навигации, если хотите, чтобы пользователи могли также управлять прокруткой.
 
