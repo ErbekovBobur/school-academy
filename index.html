@@ -172,7 +172,8 @@
       document.querySelectorAll(".dropdown").forEach((item) => {
         item.addEventListener("mouseenter", () => {
           const menu = item.querySelector(".dropdown-menu");
-          menu.style.display = "block";
+          menu.style.display.opasity = 1;
+          menu.style.display.visibility = "visible";
           menu.style.animation = "slideDown 0.3s ease-out forwards";
         });
 

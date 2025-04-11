@@ -54,7 +54,7 @@ img {
 
 /* ===== Шапка ===== */
 .sticky-header {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -136,6 +136,7 @@ img {
   box-shadow: var(--shadow);
   border-radius: var(--radius);
   padding: 15px 0;
+  /* display: none; */
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
@@ -144,6 +145,7 @@ img {
 }
 
 .dropdown:hover .dropdown-menu {
+  /* display: block; */
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -255,7 +257,9 @@ img {
     display: block;
   }
 }
-
+/* .content-wrapper {
+  margin-top: ;
+} */
 /* Мини-оптимизации */
 .wow {
   will-change: transform, opacity;
