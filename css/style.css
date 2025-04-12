@@ -283,7 +283,7 @@ img[loading="lazy"].loaded {
   align-items: center;
   justify-content: center;
   background: url("../img/orig.jpg") center/cover no-repeat;
-  margin-top: 80px;
+  /* margin-top: 80px; */
 }
 
 .banner-overlay {
