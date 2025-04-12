@@ -13,10 +13,7 @@ function continuousScroll() {
     galleryRow.scrollLeft += scrollSpeed;
 
     // Циклическая прокрутка
-    if (
-      galleryRow.scrollLeft + galleryRow.clientWidth >=
-      galleryRow.scrollWidth
-    ) {
+    if (galleryRow.scrollLeft + galleryRow.clientWidth >= galleryRow.scrollWidth) {
       galleryRow.scrollLeft = 0;
     }
   }
@@ -38,9 +35,7 @@ function openModal(img) {
   const lightboxImg = document.getElementById("lightbox-img");
   lightboxImg.src = img.src; // Устанавливаем изображение в модале
   lightbox.style.display = "flex"; // Показываем модальное окно
-  currentIndex = Array.from(
-    document.querySelectorAll(".gallery-card img")
-  ).indexOf(img); // Устанавливаем текущий индекс
+  currentIndex = Array.from(document.querySelectorAll(".gallery-card img")).indexOf(img); // Устанавливаем текущий индекс
 }
 
 // Закрытие модального окна
@@ -81,12 +76,18 @@ galleryRow.addEventListener("wheel", pauseAutoScroll);
 
 // Закрытие модального окна при клике
 document.querySelector(".lightbox-close").addEventListener("click", closeModal);
-document
-  .querySelector(".lightbox-nav.left")
-  .addEventListener("click", () => changeImage(-1));
-document
-  .querySelector(".lightbox-nav.right")
-  .addEventListener("click", () => changeImage(1));
+
+// const lightbox = document.getElementById("lightbox").addEventListener(
+//   "click",
+//   (e) => {
+//     if (e.target.id === "lightbox") {
+//       closeModal();
+//     }
+//   },
+//   { capture: true }
+// );
+document.querySelector(".lightbox-nav.left").addEventListener("click", () => changeImage(-1));
+document.querySelector(".lightbox-nav.right").addEventListener("click", () => changeImage(1));
 
 // Запуск непрерывной прокрутки
 window.addEventListener("DOMContentLoaded", () => {

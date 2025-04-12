@@ -1,11 +1,16 @@
 /* ===== Глобальные стили ===== */
 :root {
-  --primary: #1e88e5;
-  --primary-dark: #2980b9;
-  --secondary: #2ecc71;
+  /* --primary: #1e88e5; */
+  --primary: #1e90ff;
+  /* --primary-dark: #2980b9; */
+  --primary-dark: #1560bd;
+  /* --secondary: #2ecc71; */
+  --secondary: #cd0074;
   --dark: #2c3e50;
-  --light: #ecf0f1;
-  --white: #ffffff;
+  --light: #fbf4f6;
+  /* --white: #ffffff; */
+  /* --white: #fbf4f6; */
+  --white: #faf0fa;
   --gray: #95a5a6;
   --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
