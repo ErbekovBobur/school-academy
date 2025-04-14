@@ -1,153 +1,103 @@
-console.log("main.js is start");
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Элементы
+document.addEventListener("DOMContentLoaded", () => {
+  // Elements
   const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
   const mainNav = document.querySelector(".main-nav");
   const header = document.querySelector(".sticky-header");
-  const dateInput = document.getElementById("date");
 
-  // --- Мобильное меню ---
-  function toggleMenu() {
-    const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
-    mobileMenuBtn.setAttribute("aria-expanded", !isExpanded);
-    mainNav.classList.toggle("active");
-    document.body.classList.toggle("no-scroll");
-  }
+  // Load Header and Footer
+  ["header", "footer"].forEach((type) => {
+    const placeholder = document.getElementById(`${type}-placeholder`);
+    if (placeholder) {
+      fetch(`partials/${type}.html`)
+        .then((response) => response.text())
+        .then((data) => {
+          placeholder.innerHTML = data;
+          if (type === "header") initHeader();
+        });
+    }
+  });
 
-  if (mobileMenuBtn && mainNav) {
-    mobileMenuBtn.addEventListener("click", toggleMenu);
-
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".main-nav") && !e.target.closest(".mobile-menu-btn")) {
-        mainNav.classList.remove("active");
-        mobileMenuBtn.setAttribute("aria-expanded", "false");
-        document.body.classList.remove("no-scroll");
-      }
+  // Initialize Header
+  function initHeader() {
+    // Dropdown Menu
+    document.querySelectorAll(".dropdown").forEach((item) => {
+      const menu = item.querySelector(".dropdown-menu");
+      item.addEventListener("mouseenter", () => {
+        menu.style.display = "block";
+        menu.style.opacity = "1";
+        menu.style.visibility = "visible";
+      });
+      item.addEventListener("mouseleave", () => {
+        menu.style.opacity = "0";
+        menu.style.visibility = "hidden";
+        setTimeout(() => (menu.style.display = "none"), 300);
+      });
     });
-  }
 
-  // --- Плавный скролл с debounce ---
-  function smoothScroll(target) {
-    const element = document.querySelector(target);
-    if (element) {
-      const headerHeight = header ? header.offsetHeight : 0;
-      const offset = element.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+    // Mobile Menu
+    if (mobileMenuBtn && mainNav) {
+      mobileMenuBtn.addEventListener("click", () => {
+        const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
+        mobileMenuBtn.setAttribute("aria-expanded", !isExpanded);
+        mainNav.classList.toggle("active");
+        document.body.classList.toggle("no-scroll");
+      });
 
-      window.scrollTo({
-        top: offset,
-        behavior: "smooth",
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".main-nav") && !e.target.closest(".mobile-menu-btn")) {
+          mainNav.classList.remove("active");
+          mobileMenuBtn.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("no-scroll");
+        }
       });
     }
   }
 
-  function debounce(func, wait) {
-    let timeout;
-    return function (...args) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  }
-
+  // Smooth Scroll
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
+    anchor.addEventListener("click", (e) => {
       e.preventDefault();
-      const targetId = this.getAttribute("href");
+      const targetId = anchor.getAttribute("href");
       if (targetId && targetId !== "#") {
-        smoothScroll(targetId);
-        // Закрыть мобильное меню при клике на ссылку
-        if (this.classList.contains("nav-link")) {
-          mobileMenuBtn.classList.remove("active");
-          mainNav.classList.remove("active");
-          document.body.classList.remove("no-scroll");
-        }
+        const element = document.querySelector(targetId);
+        const headerHeight = header?.offsetHeight || 0;
+        window.scrollTo({
+          top: element.getBoundingClientRect().top + window.pageYOffset - headerHeight,
+          behavior: "smooth",
+        });
       }
     });
   });
 
-  // --- Фиксация шапки при скролле ---
+  // Sticky Header
   let lastScroll = 0;
-  window.addEventListener(
-    "scroll",
-    debounce(() => {
-      const currentScroll = window.pageYOffset;
-
-      if (!header) return;
-
-      if (currentScroll <= 0) {
-        header.style.boxShadow = "none";
-        header.style.background = "rgba(255, 255, 255, 0.98)";
-        return;
-      }
-
-      if (currentScroll > lastScroll && currentScroll > 100) {
-        header.style.transform = "translateY(-100%)";
-      } else {
-        header.style.transform = "translateY(0)";
-        header.style.background = "rgba(255, 255, 255, 0.98)";
-        header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
-      }
-
-      lastScroll = currentScroll;
-    }, 15)
-  );
-
-  // --- Анимация карточек при наведении ---
-  document.querySelectorAll(".feature-card").forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      card.style.transform = "translateY(-10px)";
-    });
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "translateY(0)";
-    });
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll <= 0) {
+      header.style.transform = "translateY(0)";
+      return;
+    }
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      header.style.transform = "translateY(-100%)";
+    } else {
+      header.style.transform = "translateY(0)";
+    }
+    lastScroll = currentScroll;
   });
 
-  // --- Инициализация календаря ---
-  if (dateInput) {
-    dateInput.addEventListener("input", function () {
-      const selectedDate = new Date(this.value);
-      const day = selectedDate.getDay();
-      if (day === 0 || day === 6) {
-        this.setCustomValidity("Выберите будний день");
-        this.reportValidity();
-        this.value = "";
-      } else {
-        this.setCustomValidity("");
-      }
-    });
-  }
-
-  // --- Выпадающее меню (dropdown) ---
-  document.querySelectorAll(".dropdown").forEach((item) => {
-    const menu = item.querySelector(".dropdown-menu");
-    item.addEventListener("mouseenter", () => {
-      if (menu) {
-        menu.style.display = "block";
-        menu.style.animation = "slideDown 0.3s ease-out forwards";
-      }
-    });
-
-    item.addEventListener("mouseleave", () => {
-      if (menu) {
-        menu.style.animation = "";
-        setTimeout(() => {
-          menu.style.display = "none";
-        }, 300);
-      }
-    });
+  // Card Hover Animation
+  document.querySelectorAll(".feature-card, .news-card, .teacher-card").forEach((card) => {
+    card.addEventListener("mouseenter", () => (card.style.transform = "translateY(-5px)"));
+    card.addEventListener("mouseleave", () => (card.style.transform = "translateY(0)"));
   });
 });
 
-// --- Service Worker ---
+// Service Worker
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/sw.js")
-      .then((registration) => {
-        console.log("ServiceWorker зарегистрирован:", registration.scope);
-      })
-      .catch((error) => {
-        console.log("Ошибка регистрации ServiceWorker:", error);
-      });
+      .then((reg) => console.log("ServiceWorker registered:", reg.scope))
+      .catch((err) => console.log("ServiceWorker error:", err));
   });
 }

@@ -1,27 +1,34 @@
-// === Календарь: запрет выходных ===
-function initCalendar() {
+document.addEventListener("DOMContentLoaded", () => {
+  // Calendar Validation
   const dateInput = document.getElementById("date");
   if (dateInput) {
-    dateInput.addEventListener("input", function () {
-      const selectedDate = new Date(this.value);
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.min = today;
+    dateInput.addEventListener("input", () => {
+      const selectedDate = new Date(dateInput.value);
       const day = selectedDate.getDay();
-
       if (day === 0 || day === 6) {
-        this.setCustomValidity("Выберите будний день");
-        this.reportValidity();
-        this.value = "";
+        dateInput.setCustomValidity("Выберите будний день");
+        dateInput.reportValidity();
+        dateInput.value = "";
       } else {
-        this.setCustomValidity("");
+        dateInput.setCustomValidity("");
       }
     });
   }
-}
 
-// === DOMContentLoaded ===
-document.addEventListener("DOMContentLoaded", function () {
-  initCalendar();
-  // scrollRestoration: не сохранять позицию при переходе
-  if ("scrollRestoration" in history) {
-    history.scrollRestoration = "manual";
+  // Tabs
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const tabPanes = document.querySelectorAll(".tab-pane");
+  if (tabButtons.length && tabPanes.length) {
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tabButtons.forEach((b) => b.classList.remove("active"));
+        tabPanes.forEach((p) => p.classList.remove("active"));
+        btn.classList.add("active");
+        const tabId = btn.getAttribute("data-tab");
+        document.getElementById(tabId).classList.add("active");
+      });
+    });
   }
 });
