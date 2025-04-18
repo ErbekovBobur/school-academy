@@ -1,228 +1,187 @@
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="School Academy в Ташкенте — качественное образование для детей от детского сада до средней школы"
-    />
-    <title>School Academy | Ташкент</title>
 
-    <!-- Preload -->
-    <link rel="preload" href="css/style.css" as="style" />
-    <link rel="preload" href="js/main.js" as="script" />
-    <link rel="preload" href="img/logo-uz.png" as="image" imagesrcset="img/logo-uz.png 1x, img/logo-uz@2x.png 2x" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="О School Academy в Ташкенте — история, преподаватели, галерея и миссия школы" />
+  <title>School Academy | О школе</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="shortcut icon" href="img/logo-uz.png" type="image/x-icon" />
+</head>
 
-    <!-- Styles -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-
-    <!-- Icons and Manifest -->
-    <link rel="shortcut icon" href="img/logo-uz.png" type="image/x-icon" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#3b82f6" />
-
-    <!-- Scripts -->
-    <script src="js/seo.js" defer></script>
-  </head>
-  <body>
-    <!-- Header -->
-    <div id="header-placeholder"></div>
-
-    <!-- Main Content -->
-    <main class="content-wrapper">
-      <!-- History Section -->
-      <section id="history" class="section-padding">
-        <div class="container">
-          <div class="section-header wow fadeIn">
-            <h2>Наша история</h2>
-            <div class="divider"></div>
-            <p>Как всё начиналось</p>
+<body>
+  <div id="header-placeholder"></div>
+  <main class="content-wrapper">
+    <section id="history" class="section-padding">
+      <div class="container">
+        <div class="section-header wow fadeIn">
+          <h2>Наша история</h2>
+          <div class="divider"></div>
+          <p>Как всё начиналось</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item wow fadeInLeft">
+            <div class="timeline-year">2010</div>
+            <div class="timeline-content">
+              <h3>Основание школы</h3>
+              <p>Школа открыла свои двери для первых 50 учеников начальных классов</p>
+            </div>
           </div>
-          <div class="timeline">
-            <div class="timeline-item wow fadeInLeft">
-              <div class="timeline-year">2010</div>
-              <div class="timeline-content">
-                <h3>Основание школы</h3>
-                <p>Школа открыла свои двери для первых 50 учеников начальных классов</p>
+          <div class="timeline-item wow fadeInRight">
+            <div class="timeline-year">2015</div>
+            <div class="timeline-content">
+              <h3>Расширение</h3>
+              <p>Построено новое здание для средней школы и спортивный комплекс</p>
+            </div>
+          </div>
+          <div class="timeline-item wow fadeInLeft">
+            <div class="timeline-year">2020</div>
+            <div class="timeline-content">
+              <h3>Современные технологии</h3>
+              <p>Оснащение классов интерактивными досками и компьютерными лабораториями</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="teachers" class="section-padding bg-light">
+      <div class="container">
+        <div class="section-header wow fadeIn">
+          <h2>Наши преподаватели</h2>
+          <div class="divider"></div>
+          <p>Профессионалы с большим опытом</p>
+        </div>
+        <div class="teacher-filter">
+          <button class="filter-btn active" data-filter="all" aria-label="Показать всех преподавателей">
+            Все преподаватели
+          </button>
+          <button class="filter-btn" data-filter="math" aria-label="Показать преподавателей математики">
+            Математика
+          </button>
+          <button class="filter-btn" data-filter="physics" aria-label="Показать преподавателей физики">Физика</button>
+          <button class="filter-btn" data-filter="robotics" aria-label="Показать преподавателей робототехники">
+            Робототехника
+          </button>
+        </div>
+        <div class="teachers-grid">
+          <div class="teacher-card wow fadeIn" data-wow-delay="0.2s" data-category="math">
+            <div class="teacher-img" style="background-image: url('img/teachers/teacher1.jpg')" role="img"
+              aria-label="Преподаватель Дилфуза Исматова"></div>
+            <div class="teacher-info">
+              <h3>Исматова Дилфуза</h3>
+              <p class="subject">Математика</p>
+              <p class="experience">Опыт: 15 лет</p>
+              <p class="education">Образование: МГУ, магистр</p>
+              <div class="teacher-social">
+                <a href="#" aria-label="Telegram Дилфузы Исматовой"><i class="fab fa-telegram"></i></a>
+                <a href="#" aria-label="Instagram Дилфузы Исматовой"><i class="fab fa-instagram"></i></a>
               </div>
             </div>
-            <div class="timeline-item wow fadeInRight">
-              <div class="timeline-year">2015</div>
-              <div class="timeline-content">
-                <h3>Расширение</h3>
-                <p>Построено новое здание для средней школы и спортивный комплекс</p>
-              </div>
-            </div>
-            <div class="timeline-item wow fadeInLeft">
-              <div class="timeline-year">2020</div>
-              <div class="timeline-content">
-                <h3>Современные технологии</h3>
-                <p>Оснащение классов интерактивными досками и компьютерными лабораториями</p>
+          </div>
+          <div class="teacher-card wow fadeIn" data-wow-delay="0.4s" data-category="physics">
+            <div class="teacher-img" style="background-image: url('img/teachers/teacher2.jpg')" role="img"
+              aria-label="Преподаватель Рустам Каримов"></div>
+            <div class="teacher-info">
+              <h3>Каримов Рустам</h3>
+              <p class="subject">Физика и робототехника</p>
+              <p class="experience">Опыт: 10 лет</p>
+              <p class="education">Образование: Узбекистанский университет, бакалавр</p>
+              <div class="teacher-social">
+                <a href="#" aria-label="Telegram Рустама Каримова"><i class="fab fa-telegram"></i></a>
+                <a href="#" aria-label="Instagram Рустама Каримова"><i class="fab fa-instagram"></i></a>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Teachers Section -->
-      <section id="teachers" class="section-padding bg-light">
-        <div class="container">
-          <div class="section-header wow fadeIn">
-            <h2>Наши преподаватели</h2>
-            <div class="divider"></div>
-            <p>Профессионалы с большим опытом</p>
-          </div>
-          <div class="teacher-filter">
-            <button class="filter-btn active" data-filter="all" aria-label="Показать всех преподавателей">
-              Все преподаватели
-            </button>
-            <button class="filter-btn" data-filter="math" aria-label="Показать преподавателей математики">
-              Математика
-            </button>
-            <button class="filter-btn" data-filter="physics" aria-label="Показать преподавателей физики">Физика</button>
-            <button class="filter-btn" data-filter="robotics" aria-label="Показать преподавателей робототехники">
-              Робототехника
-            </button>
-          </div>
-          <div class="teachers-grid">
-            <div class="teacher-card wow fadeIn" data-wow-delay="0.2s" data-category="math">
-              <div
-                class="teacher-img"
-                style="background-image: url('img/teachers/teacher1.jpg')"
-                role="img"
-                aria-label="Преподаватель Дилфуза Исматова"
-              ></div>
-              <div class="teacher-info">
-                <h3>Исматова Дилфуза</h3>
-                <p class="subject">Математика</p>
-                <p class="experience">Опыт: 15 лет</p>
-                <p class="education">Образование: МГУ, магистр</p>
-                <div class="teacher-social">
-                  <a href="#" aria-label="Telegram Дилфузы Исматовой"><i class="fab fa-telegram"></i></a>
-                  <a href="#" aria-label="Instagram Дилфузы Исматовой"><i class="fab fa-instagram"></i></a>
-                </div>
-              </div>
+    <section id="gallery" class="section-padding bg-light">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-translate="gallery-title">Галерея</h2>
+          <div class="divider"></div>
+          <p data-translate="mission-title">Наша миссия</p>
+        </div>
+        <div class="gallery-wrapper">
+          <button class="gallery-nav left" id="galleryPrev" aria-label="Предыдущее изображение">❮</button>
+          <div class="gallery-row" id="galleryRow">
+            <div class="gallery-card">
+              <img data-src="img/gallery/image1.jpg" src="" alt="Проект 1" loading="lazy" />
             </div>
-            <div class="teacher-card wow fadeIn" data-wow-delay="0.4s" data-category="physics">
-              <div
-                class="teacher-img"
-                style="background-image: url('img/teachers/teacher2.jpg')"
-                role="img"
-                aria-label="Преподаватель Рустам Каримов"
-              ></div>
-              <div class="teacher-info">
-                <h3>Каримов Рустам</h3>
-                <p class="subject">Физика и робототехника</p>
-                <p class="experience">Опыт: 10 лет</p>
-                <p class="education">Образование: Узбекистанский университет, бакалавр</p>
-                <div class="teacher-social">
-                  <a href="#" aria-label="Telegram Рустама Каримова"><i class="fab fa-telegram"></i></a>
-                  <a href="#" aria-label="Instagram Рустама Каримова"><i class="fab fa-instagram"></i></a>
-                </div>
-              </div>
+            <div class="gallery-card">
+              <img data-src="img/gallery/image2.jpg" src="" alt="Проект 2" loading="lazy" />
+            </div>
+            <div class="gallery-card">
+              <img data-src="img/gallery/image3.jpg" src="" alt="Проект 3" loading="lazy" />
+            </div>
+            <div class="gallery-card">
+              <img data-src="img/gallery/image4.jpg" src="" alt="Проект 4" loading="lazy" />
+            </div>
+            <div class="gallery-card">
+              <img data-src="img/gallery/image2.jpg" src="" alt="Проект 5" loading="lazy" />
+            </div>
+            <div class="gallery-card">
+              <img data-src="img/gallery/image4.jpg" src="" alt="Проект 6" loading="lazy" />
+            </div>
+            <div class="gallery-card">
+              <img data-src="img/gallery/image1.jpg" src="" alt="Проект 7" loading="lazy" />
+            </div>
+            <div class="gallery-card">
+              <img data-src="img/gallery/image3.jpg" src="" alt="Проект 8" loading="lazy" />
+            </div>
+            <div class="gallery-card">
+              <img data-src="img/gallery/image2.jpg" src="" alt="Проект 9" loading="lazy" />
+            </div>
+          </div>
+          <button class="gallery-nav right" id="galleryNext" aria-label="Следующее изображение">❯</button>
+        </div>
+        <div id="lightbox" class="lightbox" role="dialog" aria-label="Галерея изображений">
+          <span class="lightbox-close" aria-label="Закрыть галерею">×</span>
+          <button class="lightbox-nav left" aria-label="Предыдущее изображение">❮</button>
+          <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+          <button class="lightbox-nav right" aria-label="Следующее изображение">❯</button>
+        </div>
+      </div>
+    </section>
+    <!-- Mission Section -->
+    <section id="mission" class="section-padding bg-light">
+      <div class="container">
+        <div class="section-header wow fadeIn">
+          <h2>Наша миссия</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="mission-content wow fadeIn">
+          <p>
+            ROM Мы стремимся создать среду, где каждый ученик может раскрыть свой потенциал, получить качественное
+            образование и воспитать в себе лидерские качества, необходимые для успеха в современном мире.
+          </p>
+          <div class="mission-values">
+            <div class="value-item">
+              <i class="fas fa-graduation-cap"></i>
+              <h4>Качество образования</h4>
+            </div>
+            <div class="value-item">
+              <i class="fas fa-users"></i>
+              <h4>Индивидуальный подход</h4>
+            </div>
+            <div class="value-item">
+              <i class="fas fa-globe"></i>
+              <h4>Глобальное мышление</h4>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="js/main.js" defer></script>
+  <script src="js/language.js" defer></script>
+  <script src="js/gallery.js" defer></script>
+</body>
 
-      <!-- Gallery Section -->
-      <section id="gallery" class="section-padding bg-light">
-        <div class="container">
-          <div class="section-header wow fadeIn">
-            <h2 data-translate="gallery-title">Галерея</h2>
-            <div class="divider"></div>
-            <p>Погрузитесь в мир наших проектов</p>
-          </div>
-          <div class="gallery-wrapper">
-            <button class="gallery-nav left" id="galleryPrev" aria-label="Предыдущее изображение">❮</button>
-            <div class="gallery-row" id="galleryRow">
-              <div class="gallery-card">
-                <img data-src="img/gallery/image1.jpg" src="" alt="Проект 1" loading="lazy" />
-              </div>
-              <div class="gallery-card">
-                <img data-src="img/gallery/image2.jpg" src="" alt="Проект 2" loading="lazy" />
-              </div>
-              <div class="gallery-card">
-                <img data-src="img/gallery/image3.jpg" src="" alt="Проект 3" loading="lazy" />
-              </div>
-              <div class="gallery-card">
-                <img data-src="img/gallery/image4.jpg" src="" alt="Проект 4" loading="lazy" />
-              </div>
-              <div class="gallery-card">
-                <img data-src="img/gallery/image2.jpg" src="" alt="Проект 5" loading="lazy" />
-              </div>
-              <div class="gallery-card">
-                <img data-src="img/gallery/image4.jpg" src="" alt="Проект 6" loading="lazy" />
-              </div>
-              <div class="gallery-card">
-                <img data-src="img/gallery/image1.jpg" src="" alt="Проект 7" loading="lazy" />
-              </div>
-              <div class="gallery-card">
-                <img data-src="img/gallery/image3.jpg" src="" alt="Проект 8" loading="lazy" />
-              </div>
-              <div class="gallery-card">
-                <img data-src="img/gallery/image2.jpg" src="" alt="Проект 9" loading="lazy" />
-              </div>
-            </div>
-            <button class="gallery-nav right" id="galleryNext" aria-label="Следующее изображение">❯</button>
-          </div>
-          <div id="lightbox" class="lightbox" role="dialog" aria-label="Галерея изображений">
-            <span class="lightbox-close" aria-label="Закрыть галерею">×</span>
-            <button class="lightbox-nav left" aria-label="Предыдущее изображение">❮</button>
-            <img id="lightbox-img" class="lightbox-img" src="" alt="" />
-            <button class="lightbox-nav right" aria-label="Следующее изображение">❯</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Mission Section -->
-      <section id="mission" class="section-padding bg-light">
-        <div class="container">
-          <div class="section-header wow fadeIn">
-            <h2>Наша миссия</h2>
-            <div class="divider"></div>
-          </div>
-          <div class="mission-content wow fadeIn">
-            <p>
-              ROM Мы стремимся создать среду, где каждый ученик может раскрыть свой потенциал, получить качественное
-              образование и воспитать в себе лидерские качества, необходимые для успеха в современном мире.
-            </p>
-            <div class="mission-values">
-              <div class="value-item">
-                <i class="fas fa-graduation-cap"></i>
-                <h4>Качество образования</h4>
-              </div>
-              <div class="value-item">
-                <i class="fas fa-users"></i>
-                <h4>Индивидуальный подход</h4>
-              </div>
-              <div class="value-item">
-                <i class="fas fa-globe"></i>
-                <h4>Глобальное мышление</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <div id="footer-placeholder"></div>
-
-    <!-- Scripts -->
-    <script src="js/main.js" defer></script>
-    <script src="js/language.js" defer></script>
-    <script src="js/about.js" defer></script>
-    <script src="js/gallery.js" defer></script>
-    <script src="js/analytics.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script>
-      new WOW({ boxClass: "wow", animateClass: "animated", offset: 50, mobile: true }).init();
-    </script>
-  </body>
 </html>
